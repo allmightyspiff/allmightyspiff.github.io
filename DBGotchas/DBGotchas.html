@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Database Pitfalls</title>
+    <meta charset="utf-8">
+    <style>
+      body { 
+        font-family: monospace; 
+      }
+      h1 {
+        font-family: monospace;
+        color: #F2B632;
+      } 
+      h2 {
+        font-family: monospace;
+        color: #8834A5;
+      }
+      h3 {
+        color: #A57712;
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Courier New'; }
+      .remark-slide-content {
+        background-color: #252839;
+        color: #E1F4EC;
+      }
+    img {background-color: #E1F4EC ;}
+    .columnA {float:left; width: 49%;}
+    .columnB {float:right; width: 49%;}
+    a {color:#A57712; }
+    hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
+    li {margin-bottom: .5em; margin-top: .5em;}
+
+    </style>
+  </head>
+  <body>
+<!--#A57712  Dark Gold-->
+<!--#E1F4EC  White Gold -->
+<!--#F2B632  Bright Gold -->
+<!--#27182C  Dark Purple -->
+<!--#8834A5  Light Purple -->
+<!--#D69ECA  White Purple -->
+<textarea id="source">
+class: center, middle
+# .center[Database Pitfalls]
+
+
+Christopher Gallo
+
+---
+
+
+## NoSQL v SQL
+
+.columnA[
+### NoSQL
+-----
+* LARGE DATA
+* variety of columns in a data set
+* Documents Store
+    - Usually has a version system
+    - Eventually consistent
+* Key-Value     
+* Graph
+    - Nodes, Edges, Relations
+* Wide-Column Store
+    - Like a relational DB, but column size can very in a table
+]
+
+.columnB[
+### SQL
+-----
+* RELATIONAL data
+* Tables
+* Predefined schema
+* Good for complex queries
+* ACID compliant
+    - Atomicity, Consistency, Isolation, Durability
+]
+
+
+---
+
+## Indexes
++ Explain explained
+```sql
+EXPLAIN SELECT state_name FROM State WHERE state_cd = 'TX';
++-------+------+---------------+--------+---------+-------+------+------------+
+| table | type | possible_keys | key    | key_len | ref   | rows | Extra      |
++-------+------+---------------+--------+---------+-------+------+------------+
+| State | ref  | st_idx        | st_idx | 2       | const | 1    | where used |
++-------+------+---------------+--------+---------+-------+------+------------+
+```
++ Dont over index
++ NULLS
+    * use anything else to indicate the absense of a value
++ Appropriate use of datatypes
+    * varchar for date or ip is bad
++ It is OK to have un-normalized data
+    * Joins have a performance cost
+
+
+---
+
+## Triggers, Constraints, and Cascade
+### Obscurity 
+* Logic should be in application
+* Can be easily forgotten if not documented
+
+### Complexity 
++ A good source of unexpected behavior, aka bugs
+
+### Perforamace
+* Triggers run every time a Data Manipulation Language (DML) operation runs 
+
+---
+
+## What not to store
++ Images
++ unstructured data you want to search
++ Unencrypted Sensitive data
+    * Hash AND salt passwords
+    * Don't use MD5 or SHA1
+
+---
+
+## Joins
++ Joins > subquery
+
+![Venn Diagram](/DBGotchas/sql-joins.png)
+
+
+---
+
+## Performance Tuning
++ acquire connection only when needed, and immediately close
++ db files should live on their own storage
++ understand the query cache
+
+---
+
+## Big data and scaling up
++ table partition based on timestamp
+    * only partition on something else if it REALLY makes sense
++ sharding
++ multi master setups
++ having a read sql string and a write sql string
+
+</textarea>
+    <script src="/remark/remark-latest.min.js"></script>
+    <script src="/remark/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript">
+      var hljs = remark.highlighter.engine;
+    </script>
+    <script src="/remark/terminal.language.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'solarized-dark',
+        ratio: '16:9'
+      });
+      // extract the embedded styling from ansi spans
+      $('code.terminal span.hljs-ansi').replaceWith(function(i, x) {
+        return x.replace(/<(\/?(\w+).*?)>/g, '<$1>')
+      });
+    </script>
+  </body>
+</html>
