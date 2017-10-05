@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Day 01</title>
+    <meta charset="utf-8">
+    <style>
+      body { 
+        font-family: monospace; 
+      }
+      h1 {
+        font-family: monospace;
+        color: #F2B632;
+      } 
+      h2 {
+        font-family: monospace;
+        color: #8834A5;
+      }
+      h3 {
+        color: #A57712;
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Courier New'; }
+      .remark-slide-content {
+        background-color: #252839;
+        color: #E1F4EC;
+      }
+    img {background-color: #E1F4EC ;}
+    .columnA {float:left; width: 49%;}
+    .columnB {float:right; width: 49%; }
+    a {color:#A57712; }
+    hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
+    li {margin-bottom: .5em; margin-top: .5em;}
+    blockquote { 
+        color: #F2B632;
+        font-family: Palatino;
+        font-weight: normal;
+     }
+    </style>
+<!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
+  </head>
+  <body>
+    <!--#A57712  Dark Gold-->
+    <!--#E1F4EC  White Gold -->
+    <!--#F2B632  Bright Gold -->
+    <!--#27182C  Dark Purple -->
+    <!--#8834A5  Light Purple -->
+    <!--#D69ECA  White Purple -->
+    <textarea id="source">
+
+
+
+class: center, middle
+# .center[Computer Science Fundamentals]
+Christopher Gallo
+
+---
+
+
+# Christopher Gallo
+- Computer Science Bachelors degreen from Univeristy of Houston
+- Systems administrator / Developer
+- 10+ years experience with web focused companies
+
+---
+
+# This Class
+- Core concepts behind computer science
+    + Sorting Algorithms
+    + Datastructures
+- Practice interview questions
+- Practice solving problems with code
+- A deeper understanding of how python works 
+
+???
+Throw information at you to see what sticks
+If you don't understand something please ask
+
+---
+
+# When will you need this?
+- The Interview
+- Solving the complicated problems
+- Increasing application performance
+
+---
+
+# Fair Warning
+- This stuff is hard
+- Please ask questions
+    + Now
+    + \#cs-htx-10-2017 in slack
+    + @cgallo in slack
+- Learn what you can
+
+---
+
+# Python skeleton code
+
+```python
+"""
+@package examples 
+@author Christopher Gallo
+This is the base for all examples. Put what your example does here.
+"""
+from pprint import pprint as pp
+
+class example():
+
+    def __init__(self):
+        """Setup
+        """
+
+    def main(self):
+        """Says Hello World 
+        """
+        print("Hello World")
+
+if __name__ == "__main__":
+    main = example()
+    main.main()
+```
+
+
+---
+
+# Virtualenv
+
+```bash
+$> brew install python3
+$> python3 -m venv python3
+$> source python3/bin/activate
+$> python --version
+Python 3.6.3
+```
+
+### /Library/Python/2.7/site-packages/   
+Important system packages, dont touch
+
+### /User/you/project/python3
+Random junk you are playing around with
+
+---
+
+# What is an algorith?
+>“a process or set of rules to be followed in calculations or other problem-solving operations, especially by a computer.”
+
+---
+
+# Steps to creating an algorith
+1. Come up with a plan, WITHOUT code
+2. figure out how to create a program that does the plan
+
+---
+
+# Sorting
+We have an array of unsorted integers, but need them to be in ascending order. 
+# .center[?]
+
+???
+lets stop and think this through
+
+1. pass through the array.
+2. check if n > n+1
+3. if yes, swap
+4. if no, n++
+5. continue until...?
+
+---
+
+# Create the algorithm
+
+```python
+"""
+@package examples 
+@author Christopher Gallo
+Bubble Sorting
+"""
+from pprint import pprint as pp
+
+class example():
+
+    def main(self):
+        """Says Hello World 
+        """
+        print("Hello World")
+
+if __name__ == "__main__":
+    main = example()
+    main.main()
+
+```
+
+---
+
+# You discovered Bubble Sort!
+
+
+```python
+    def sort(self, to_sort):
+        """Bubble sorts to_sort
+        """
+        is_sorted = False
+        while not is_sorted:
+            array_len = len(to_sort)
+            jobs_done = True
+            pp(to_sort)
+            for i in range(0, array_len):
+                # Makes sure we dont go out of bounds
+                if i + 1 == array_len: 
+                    continue
+                # At least one element was unsorted
+                if to_sort[i] > to_sort[i + 1]:
+                    jobs_done = False
+                    temp = to_sort[i]
+                    to_sort[i] = to_sort[i + 1]
+                    to_sort[i + 1] = temp
+                i = i + 1
+            # If we went over the array without changes, we are done
+            if jobs_done:
+                is_sorted = True
+        return to_sort
+```
+
+
+---
+
+# The easy way
+```python
+    def simple_sort(self, to_sort):
+        to_sort.sort()
+        return to_sort
+```
+
+>Timsort is a hybrid stable sorting algorithm, derived from merge sort and insertion sort, designed to perform well on many kinds of real-world data. It was implemented by Tim Peters in 2002 for use in the Python programming language. The algorithm finds subsequences of the data that are already ordered, and uses that knowledge to sort the remainder more efficiently.
+
+https://en.wikipedia.org/wiki/Timsort
+
+### list.sort(key=None, reverse=False)
+Sort the items of the list in place (the arguments can be used for sort customization, see sorted() for their explanation).
+
+---
+
+# Python Debugging
+show off dir()
+throw some random prints in there
+
+
+---
+
+# Interview Question
+
+If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+
+__Find the sum of all the multiples of 3 or 5 below 50,000,000.__
+
+</textarea>
+    <script src="/remark/remark-latest.min.js"></script>
+    <script src="/remark/jquery-2.2.4.min.js"></script>
+    <script src="/remark/highlight.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'solarized-dark',
+        ratio: '16:9',
+        highlightLines: true
+      });
+      var hljs = hljs1.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
