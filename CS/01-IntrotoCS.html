@@ -35,6 +35,10 @@
         font-family: Palatino;
         font-weight: normal;
      }
+     .MathJax {
+     font-size: 10em !important;
+     color: #D69ECA !important;
+    }
     </style>
 <!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
   </head>
@@ -144,6 +148,8 @@ Random junk you are playing around with
 # What is an algorith?
 >“a process or set of rules to be followed in calculations or other problem-solving operations, especially by a computer.”
 
+>"Word used by programmers when they do not want to explain what they did"
+
 ---
 
 # Steps to creating an algorith
@@ -196,29 +202,21 @@ if __name__ == "__main__":
 
 
 ```python
-    def sort(self, to_sort):
-        """Bubble sorts to_sort
-        """
-        is_sorted = False
-        while not is_sorted:
-            array_len = len(to_sort)
-            jobs_done = True
-            pp(to_sort)
-            for i in range(0, array_len):
-                # Makes sure we dont go out of bounds
-                if i + 1 == array_len: 
+    def bubble_sort(self,my_array):
+        array_length = len(my_array)
+        total_number_of_passes = array_length
+        for i in range(0, total_number_of_passes):
+            for j in range(0, array_length):
+                # Avoid going out of array bounds
+                if j == array_length - 1:
                     continue
-                # At least one element was unsorted
-                if to_sort[i] > to_sort[i + 1]:
-                    jobs_done = False
-                    temp = to_sort[i]
-                    to_sort[i] = to_sort[i + 1]
-                    to_sort[i + 1] = temp
-                i = i + 1
-            # If we went over the array without changes, we are done
-            if jobs_done:
-                is_sorted = True
-        return to_sort
+                if my_array[j] > my_array[j + 1]:
+                    temp = my_array[j]
+                    my_array[j] = my_array[j + 1]
+                    my_array[j + 1] = temp
+            # Last element of every pass will be the highest number
+            array_length = array_length - 1
+        return my_array
 ```
 
 
@@ -240,10 +238,36 @@ Sort the items of the list in place (the arguments can be used for sort customiz
 
 ---
 
-# Python Debugging
-show off dir()
-throw some random prints in there
+# Thoughts on Bubble Sort
 
+![Bubbles](/CS/Day1/Sorting_bubblesort_anim.gif)
+
+## Is this useful to know?
+
+```bash
+# 5000 element pure random array
+Bubble Sort = 4.437254905700684 seconds
+list.sort() = 0.0015649795532226562 seconds
+```
+---
+
+# Python Debugging
+
+```python
+>>> array = []
+>>> dir(array)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', 
+'__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', 
+'__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', 
+'__lt__', '__mul__', '__ne__', '__new__', '__reduce__','__reduce_ex__', '__repr__', 
+'__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__',
+'__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 
+'remove', 'reverse', 'sort']
+```
+
+## Never underestimate print()
+
+## Follow the code
 
 ---
 
@@ -253,17 +277,33 @@ If we list all the natural numbers below 10 that are multiples of 3 or 5, we get
 
 __Find the sum of all the multiples of 3 or 5 below 50,000,000.__
 
+
+---
+
+# Math time
+
+
+`\(\sum_{k=1}^{n} k =  \frac{n(n+1)}{2}\)`
+
+
 </textarea>
     <script src="/remark/remark-latest.min.js"></script>
     <script src="/remark/jquery-2.2.4.min.js"></script>
     <script src="/remark/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
     <script type="text/javascript">
       var slideshow = remark.create({
         highlightStyle: 'solarized-dark',
         ratio: '16:9',
         highlightLines: true
       });
+      MathJax.Hub.Config({
+          tex2jax: {
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+          }
+      });
       var hljs = hljs1.initHighlightingOnLoad();
+      MathJax.Hub.Configured();
     </script>
   </body>
 </html>
