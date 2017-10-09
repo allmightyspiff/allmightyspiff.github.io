@@ -36,7 +36,7 @@
         font-weight: normal;
      }
      .MathJax {
-     font-size: 10em !important;
+     font-size: 8em !important;
      color: #D69ECA !important;
     }
     </style>
@@ -83,7 +83,7 @@ If you don't understand something please ask
 
 # When will you need this?
 - The Interview
-- Solving the complicated problems
+- Solving complicated problems
 - Increasing application performance
 
 ---
@@ -249,6 +249,10 @@ Sort the items of the list in place (the arguments can be used for sort customiz
 Bubble Sort = 4.437254905700684 seconds
 list.sort() = 0.0015649795532226562 seconds
 ```
+
+???
+Was good for data on tape storage, when only a few variables could be in memory at a time.
+
 ---
 
 # Python Debugging
@@ -280,12 +284,66 @@ __Find the sum of all the multiples of 3 or 5 below 50,000,000.__
 
 ---
 
+# Simple Answer
+```python
+from pprint import pprint as pp
+
+class sigma_finder():
+
+    def main(self, limit):
+        result = 0
+
+        for i in range(1, limit):
+            if i % 3 == 0 or i % 5 == 0:
+                result = result + i
+        return result
+
+if __name__ == "__main__":
+    limit = 50000000
+    main = sigma_finder()
+    result = main.main(limit)
+    print("The sum of all the multiples of 3 or 5 below %s is %s" % (limit,result))
+```
+
+```bash
+The sum of all the multiples of 3 or 5 below 50000000 is 583333291666668
+[Finished in 11.1s]
+```
+
+---
 # Math time
 
 
 `\(\sum_{k=1}^{n} k =  \frac{n(n+1)}{2}\)`
 
+`\(\sum_{k=1}^{n/3} 3k +  \sum_{k=1}^{n/5} 5k - \sum_{k=1}^{n/15} 15k  \)`
 
+---
+# Code time
+
+```python
+class sigma_finder():
+    def sum_divisible_by(self, number, max):
+        p = int(max / number)
+        sum = number * (p * (p + 1)) / 2
+        return int(sum)
+
+    def main(self, limit):
+        limit = limit - 1 
+        result = sum_divisible_by(3, MAX) + sum_divisible_by(5, MAX) - sum_divisible_by(15, MAX)
+        return result
+
+if __name__ == "__main__":
+    limit = 50000000
+    main = sigma_finder()
+    result = main.main(limit)
+    print("The sum of all the multiples of 3 or 5 below %s is %s" % (limit,result))
+```
+
+```bash
+The sum of all the multiples of 3 or 5 below 50000000 is 583333291666668
+[Finished in 0.1s]
+```
 </textarea>
     <script src="/remark/remark-latest.min.js"></script>
     <script src="/remark/jquery-2.2.4.min.js"></script>

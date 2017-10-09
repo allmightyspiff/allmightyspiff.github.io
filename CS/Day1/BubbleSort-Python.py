@@ -4,40 +4,54 @@
 Bubble Sorting
 """
 from pprint import pprint as pp
+import random
+import time
+import copy
 
 class bubbleSort():
 
-    def sort(self, to_sort):
-        """Bubble sorts to_sort
-        """
-        is_sorted = False
-        while not is_sorted:
-            array_len = len(to_sort)
-            jobs_done = True
-            pp(to_sort)
-            for i in range(0,array_len):
-                
-                if i + 1 == array_len: # Makes sure we dont go out of bounds
+    def bubble_sort(self,my_array):
+        array_length = len(my_array)
+        total_number_of_passes = array_length
+        for i in range(0, total_number_of_passes):
+            for j in range(0, array_length):
+                if j == array_length - 1:
                     continue
-                # At least one element was unsorted
-                if to_sort[i] > to_sort[i + 1]:
-                    jobs_done = False
-                    temp = to_sort[i]
-                    to_sort[i] = to_sort[i + 1]
-                    to_sort[i + 1] = temp
-                i = i + 1
-            # If we went over the array without changes, we are done
-            if jobs_done:
-                is_sorted = True
-        return to_sort
+                if my_array[j] > my_array[j + 1]:
+
+                    temp = my_array[j]
+                    my_array[j] = my_array[j + 1]
+                    my_array[j + 1] = temp
+            array_length = array_length - 1
+        return my_array
+
 
     def simple_sort(self, to_sort):
         to_sort.sort()
         return to_sort
 
+    def random_array(self, length):
+        the_array = []
+        for i in range(0, length):
+            the_array.append(random.randint(0,100000))
+        return the_array
+
 if __name__ == "__main__":
-    test_array = [5, 9, 4, 1, 2, 3, 8]
     main = bubbleSort()
-    sorted_array = main.simple_sort(test_array)
+    test_array1 = main.random_array(5000)
+    test_array2 = copy.deepcopy(test_array1)
+
+    print("Sorting #1")
+    now = time.time()
+    main.bubble_sort(test_array1)
+    then = time.time()
+    time1 = then - now
+    print("Sorting #2")
+    now = time.time()
+    main.simple_sort(test_array2)
+    then = time.time()
+    time2 = then - now
+
+    print("#1 = %s\n#2 = %s" % (time1, time2))
     print("Jobs Done")
-    pp(sorted_array)
+    # pp(sorted_array)
