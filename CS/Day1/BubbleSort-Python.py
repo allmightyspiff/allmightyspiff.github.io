@@ -15,13 +15,14 @@ class bubbleSort():
         total_number_of_passes = array_length
         for i in range(0, total_number_of_passes):
             for j in range(0, array_length):
+                # Avoid going out of array bounds
                 if j == array_length - 1:
                     continue
                 if my_array[j] > my_array[j + 1]:
-
                     temp = my_array[j]
                     my_array[j] = my_array[j + 1]
                     my_array[j + 1] = temp
+            # Last element of every pass will be the highest number
             array_length = array_length - 1
         return my_array
 
