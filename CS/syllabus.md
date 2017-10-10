@@ -4,15 +4,19 @@
 ## Day 1 - Introduction
 + Introduction to class. Why are we here? What will we learn?
 + Our Python Environment
+    * http://docs.python-guide.org/en/latest/dev/virtualenvs/
 + What is an algorithm?
 + Bubble Sort
     * https://youtu.be/8Kp-8OGwphY
     * https://youtu.be/lyZQPjUT5B4
+    * https://en.wikipedia.org/wiki/Bubble_sort
 + Interview Exercise
+    * https://math.stackexchange.com/questions/9259/find-the-sum-of-all-the-multiples-of-3-or-5-below-1000
 
 ## Day 2 - Sorting
 + Measuring our algorithms
 + Introduction to Big O
+    * https://youtu.be/MyeV2_tGqvw
 + Insertion Sort
 + Selection Sort
 + Interview Exercise
