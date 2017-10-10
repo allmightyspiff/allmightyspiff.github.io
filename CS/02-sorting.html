@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Day 02</title>
+    <meta charset="utf-8">
+    <style>
+      body { 
+        font-family: monospace; 
+      }
+      h1 {
+        font-family: monospace;
+        color: #F2B632;
+      } 
+      h2 {
+        font-family: monospace;
+        color: #8834A5;
+      }
+      h3 {
+        color: #A57712;
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Courier New'; }
+      .remark-slide-content {
+        background-color: #252839;
+        color: #E1F4EC;
+      }
+    img {background-color: #E1F4EC ;}
+    .columnA {float:left; width: 49%;}
+    .columnB {float:right; width: 49%; }
+    a {color:#A57712; }
+    hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
+    li {margin-bottom: .5em; margin-top: .5em;}
+    blockquote { 
+        color: #F2B632;
+        font-family: Palatino;
+        font-weight: normal;
+     }
+     .MathJax {
+     font-size: 8em !important;
+     color: #D69ECA !important;
+    }
+    th {
+      color:#A57712 ;
+    }
+    .brightGold {
+      color: #F2B632
+    }
+    .lightPurple {
+      color: #8834A5 ;
+    }
+    .bigO {
+      height: 475px;
+    }
+    img {
+      height: -webkit-fill-available;;
+    }
+    </style>
+<!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
+  </head>
+  <body>
+    <!--#A57712  Dark Gold-->
+    <!--#E1F4EC  White Gold -->
+    <!--#F2B632  Bright Gold -->
+    <!--#27182C  Dark Purple -->
+    <!--#8834A5  Light Purple -->
+    <!--#D69ECA  White Purple -->
+    <textarea id="source">
+
+
+
+class: center, middle
+# .center[Sorting]
+
+---
+
+# TODO
+### + Performance
+### + Big O
+### + Insertion Sort
+### + Selection Sort
+
+---
+
+# Performance 
+
+.columnA[
+### CPU Cycles
++ Context Switching
++ Number of commands run
+
+### Memory
+
+### Disk Access
++ RAID 0 - Fast
++ RAID 1 - Resilient 
++ RAID 5 - Balanced
++ RAID 10 - Expensive
+]
+.columnB[
+
+
+
+|System Event | Actual Latency|  Scaled Latency|
+| --- | --- | --- |
+|One CPU cycle| 0.4 ns|  1 s
+|Level 1 cache  | 0.9 ns | 2 s
+|Level 2 cache |  2.8 ns|  7 s
+|Level 3 cache  | 28 ns| 1 min
+|Main memory  | ~100 ns| 4 min
+|SSD I/O |50–150 μs| 1.5–4 days
+|SATA disk I/O| 1–10 ms| 1–9 months
+|WAN : SFO->NYC |65 ms[3] | 5 years
+|WAN : SFO->HKG | 141 ms3| 11 years
+]
+
+???
+http://www.prowesscorp.com/computer-latency-at-a-human-scale/
+
+---
+
+# Big O Notation
+> In computer science, big O notation is used to classify algorithms according to how their running time or space requirements grow as the input size grows
+
+.columnA[
++ O(1) .brightGold[BEST]
++ O(log n)
++ O(n)
++ O(n log n)
++ O(n^2)
++ O(n^3)​
++ O(2^n) .lightPurple[WORST]
+]
+
+.columnB.bigO[
+![GRAPH](/CS/Day2/BigO.png)
+]
+
+---
+
+#  Insertion Sort
+---
+
+# Selection Sort
+---
+
+# Merge Sort
+---
+
+# Interview Question
+
+
+</textarea>
+    <script src="/remark/remark-latest.min.js"></script>
+    <script src="/remark/jquery-2.2.4.min.js"></script>
+    <script src="/remark/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'solarized-dark',
+        ratio: '16:9',
+        highlightLines: true
+      });
+      MathJax.Hub.Config({
+          tex2jax: {
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+          }
+      });
+      var hljs = hljs1.initHighlightingOnLoad();
+      MathJax.Hub.Configured();
+    </script>
+  </body>
+</html>

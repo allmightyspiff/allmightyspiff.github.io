@@ -13,11 +13,10 @@
 + Introduction to Big O
 + Insertion Sort
 + Selection Sort
-+ Merge Sort
 + Interview Exercise
 
 ##Day 3 - Recursion
-+ Programming problem review
++ Merge Sort
 + Introduction to Recursion
 + Recursion Exercises
 
