@@ -14,7 +14,7 @@ class bubbleSort():
         while not is_sorted:
             array_len = len(to_sort)
             jobs_done = True
-            pp(to_sort)
+            # pp(to_sort)
             for i in range(0,array_len):
                 # Makes sure we dont go out of bounds
                 if i + 1 == array_len:

@@ -54,6 +54,9 @@
     .bigO {
       height: 475px;
     }
+    .remark-code{
+        font-size: 20px;
+    }
 
     </style>
 <!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
@@ -110,8 +113,8 @@ class: center, middle
 |Main memory  | ~100 ns| 4 min
 |SSD I/O |50–150 μs| 1.5–4 days
 |SATA disk I/O| 1–10 ms| 1–9 months
-|WAN : SFO->NYC |65 ms[3] | 5 years
-|WAN : SFO->HKG | 141 ms3| 11 years
+|WAN : SFO->NYC |65 ms| 5 years
+|WAN : SFO->HKG | 141 ms| 11 years
 ]
 
 ???
@@ -133,7 +136,7 @@ http://www.prowesscorp.com/computer-latency-at-a-human-scale/
 ]
 
 .columnB.bigO[
-![GRAPH](/CS/Day2/BigO.png)
+<img height="400px" src='/CS/Day2/BigO.png'>
 ]
 
 ---
@@ -149,8 +152,35 @@ http://www.prowesscorp.com/computer-latency-at-a-human-scale/
 ]
 
 .columnB[
-<img height="300px" src='/CS/Day2/SelectionEg02.gif' >
+<img height="270px" src='/CS/Day2/SelectionEg02.gif' >
 ]
+https://en.wikipedia.org/wiki/Selection_sort
+---
+
+# Selection Sort Code
+```python
+def sort(self, my_array):
+    length = len(my_array)
+    # Loop through the whole array
+    for i in range(length):
+        # Set min_index to current element
+        min_index = i
+
+        # Loop through the array, but start at i + 1.
+        # Elements before i + 1 are sorted already
+        for x in range(i + 1, length):
+            # Update min_index if we found a smaller number 
+            if my_array[min_index] > my_array[x]:
+                min_index = x
+
+        # if our smallest number isnt the current number, swap
+        if i != min_index:
+            temp = my_array[i]
+            my_array[i] = my_array[min_index]
+            my_array[min_index] = temp
+
+    return my_array
+```
 
 ---
 
@@ -160,6 +190,7 @@ http://www.prowesscorp.com/computer-latency-at-a-human-scale/
 + Think of sorting a hand of cards
 + Effecient on small, or partially sorted data
 + O(n^2)
++ Insertion sort is one of the fastest algorithms for sorting very small arrays, even faster than quicksort
 ]
 
 .columnB[
@@ -167,31 +198,70 @@ http://www.prowesscorp.com/computer-latency-at-a-human-scale/
 ]
 ---
 
+# Insertion Sort Code
 
+```python
+def sort(self, my_array):
+    for i in range(len(my_array)):
+        # Keep track of current element
+        temp = my_array[i]
+        x = i - 1 
+        # Loop down the array until we hit the end, or a number that is bigger than temp
+        while x >= 0 and my_array[x] > temp:
+            # Move element up 1 position
+            my_array[x + 1] = my_array[x]
+            x = x - 1
+
+        my_array[x + 1 ] = temp
+    return my_array
+```
+
+---
 # Merge Sort
+.columnA[
++ Efficient, general-purpose, comparison-based sorting algorithm
++ O(n log n)
++ Insertion sort is one of the fastest algorithms for sorting very small arrays, even faster than quicksort
+1. Divide the unsorted list into n sublists, each containing 1 element 
+2. Repeatedly merge sublists to produce new sorted sublists until there is only 1 sublist remaining. This will be the sorted list.
+]
+
+.columnB[
+<img height="300px" src='/CS/Day2/Merge-sort.gif' >
+]
+
+
+
+
 ---
 
 # Interview Question
+.center[ 
+### Reverse an array
+]
+
+---
+
+# Interview Question
+.center[
+### PALINDROMES
+]
++ Create a function to check if a string is a palindrome
++ Create a function to turn a string into a palindrome
 
 
 </textarea>
     <script src="/remark/remark-latest.min.js"></script>
     <script src="/remark/jquery-2.2.4.min.js"></script>
     <script src="/remark/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
     <script type="text/javascript">
       var slideshow = remark.create({
-        highlightStyle: 'default',
+        highlightStyle: 'zenburn',
         ratio: '16:9',
         highlightLines: true
       });
-      MathJax.Hub.Config({
-          tex2jax: {
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-          }
-      });
       var hljs = hljs1.initHighlightingOnLoad();
-      MathJax.Hub.Configured();
+
     </script>
   </body>
 </html>

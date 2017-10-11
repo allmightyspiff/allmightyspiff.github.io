@@ -14,17 +14,23 @@
     * https://math.stackexchange.com/questions/9259/find-the-sum-of-all-the-multiples-of-3-or-5-below-1000
 
 ## Day 2 - Sorting
+https://en.wikipedia.org/wiki/Sorting_algorithm
 + Measuring our algorithms
 + Introduction to Big O
     * https://youtu.be/MyeV2_tGqvw
 + Insertion Sort
+    * https://en.wikipedia.org/wiki/Insertion_sort
 + Selection Sort
+    * https://en.wikipedia.org/wiki/Selection_sort
 + Interview Exercise
 
 ## Day 3 - Recursion
-+ Merge Sort
+
 + Introduction to Recursion
 + Recursion Exercises
++ Merge Sort
+    * http://www.geeksforgeeks.org/merge-sort/
++ Compression
 
 ## Day 4 - Searching
 + Linear Search
