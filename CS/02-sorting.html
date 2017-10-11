@@ -6,6 +6,7 @@
     <style>
       body { 
         font-family: monospace; 
+        font-size: 2em;
       }
       h1 {
         font-family: monospace;
@@ -23,6 +24,8 @@
       .remark-slide-content {
         background-color: #252839;
         color: #E1F4EC;
+        font-size: 25px;
+        padding: 0em 1em 1em 1em;
       }
     img {background-color: #E1F4EC ;}
     .columnA {float:left; width: 49%;}
@@ -51,9 +54,7 @@
     .bigO {
       height: 475px;
     }
-    img {
-      height: -webkit-fill-available;;
-    }
+
     </style>
 <!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
   </head>
@@ -137,11 +138,35 @@ http://www.prowesscorp.com/computer-latency-at-a-human-scale/
 
 ---
 
-#  Insertion Sort
----
+
 
 # Selection Sort
+
+.columnA[
++ Find lowest number in array, swap with current index
++ Somewhat simple
++ O(n^2)
+]
+
+.columnB[
+<img height="300px" src='/CS/Day2/SelectionEg02.gif' >
+]
+
 ---
+
+#  Insertion Sort
+
+.columnA[
++ Think of sorting a hand of cards
++ Effecient on small, or partially sorted data
++ O(n^2)
+]
+
+.columnB[
+<img height="300px" src='/CS/Day2/Insertion-sort-example.gif' >
+]
+---
+
 
 # Merge Sort
 ---
@@ -156,7 +181,7 @@ http://www.prowesscorp.com/computer-latency-at-a-human-scale/
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
     <script type="text/javascript">
       var slideshow = remark.create({
-        highlightStyle: 'solarized-dark',
+        highlightStyle: 'default',
         ratio: '16:9',
         highlightLines: true
       });
