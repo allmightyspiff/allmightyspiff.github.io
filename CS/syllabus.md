@@ -27,6 +27,7 @@ https://en.wikipedia.org/wiki/Sorting_algorithm
 ## Day 3 - Recursion
 
 + Introduction to Recursion
+    * https://youtu.be/HXNhEYqFo0o
 + Recursion Exercises
 + Merge Sort
     * http://www.geeksforgeeks.org/merge-sort/
