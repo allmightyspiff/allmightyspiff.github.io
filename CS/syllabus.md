@@ -31,7 +31,7 @@ https://en.wikipedia.org/wiki/Sorting_algorithm
 + Recursion Exercises
 + Merge Sort
     * http://www.geeksforgeeks.org/merge-sort/
-+ Compression
+
 
 ## Day 4 - Searching
 + Linear Search
@@ -101,3 +101,9 @@ https://en.wikipedia.org/wiki/Sorting_algorithm
 ## Links
 http://fabiensanglard.net/floating_point_visually_explained/
 https://en.wikipedia.org/wiki/Computer_science
+
+# random things I might include somewhere
++ compression
+
+
+https://cewing.github.io/training.codefellows/assignments/day01/sublime_as_ide.html

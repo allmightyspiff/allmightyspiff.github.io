@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Day 02</title>
+    <title>Day 03 - Recursion</title>
     <meta charset="utf-8">
     <style>
       body { 
@@ -37,6 +37,7 @@
         color: #F2B632;
         font-family: Palatino;
         font-weight: normal;
+        font-size: 35px;
      }
      .MathJax {
      font-size: 8em !important;
@@ -57,7 +58,6 @@
     .remark-code{
         font-size: 20px;
     }
-
     </style>
 <!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
   </head>
@@ -76,18 +76,304 @@ class: center, middle
 
 ---
 
+
 # TODO
-### + Recursion
-### + Merge Sort
-### + Compression
+
+- The Stack
+- Recursion
+- Merge Sort
+- Interview Questions
 
 ---
-# Recursion
+
+# The Stack
+
+.columnA[
+```python
+*from pprint import pprint as pp
+
+class helloWorld():
+    def main(self):
+        print("Hello World")
+
+if __name__ == "__main__":
+    main = helloWorld()
+    main.main()
+```
+]
+
+.columnB[
+1. Load Module pprint into memory with label pp
+]
 
 ---
-# Recursion Problems
+
+# The Stack
+
+.columnA[
+```python
+from pprint import pprint as pp
+
+*class helloWorld():
+    def main(self):
+        print("Hello World")
+
+if __name__ == "__main__":
+    main = helloWorld()
+    main.main()
+```
+]
+
+.columnB[
+1. load helloWorld into memory
+]
 
 ---
+
+# The Stack
+
+.columnA[
+```python
+from pprint import pprint as pp
+
+class helloWorld():
+    def main(self):
+        print("Hello World")
+
+*if __name__ == "__main__":
+    main = helloWorld()
+    main.main()
+```
+]
+
+.columnB[
+1. resolve __name__ definition
+2. does __name__ == "__main__" ?
+]
+
+---
+
+# The Stack
+
+.columnA[
+```python
+from pprint import pprint as pp
+
+class helloWorld():
+    def main(self):
+        print("Hello World")
+
+if __name__ == "__main__":
+*   main = helloWorld()
+    main.main()
+```
+]
+
+.columnB[
+1. create a memory location labeled 'main'
+2. set 'main' to be an instance of helloWorld()
+3. run helloWorld.__init__()
+]
+
+---
+
+# The Stack
+
+.columnA[
+```python
+from pprint import pprint as pp
+
+class helloWorld():
+    def main(self):
+        print("Hello World")
+
+if __name__ == "__main__":
+    main = helloWorld()
+*   main.main()
+```
+]
+
+.columnB[
+1. call main.main()
+2. call print("Hello World")
+3. Actually write things to the screen
+]
+
+---
+
+# Welcome to Recursion
+>"To understand recursion, you must first understand recursion"
+
+.center[
+![Recursion](/CS/Day3/xkcd-recursion.gif)
+]
+
+>"The power of recursion evidently lies in the possibility of defining an infinite set of objects by a finite statement. In the same manner, an infinite number of computations can be described by a finite recursive program, even if this program contains no explicit repetitions."
+---
+
+
+# Recursion Pro Tips
+
+1. Recursion is the process of calling a function from within itself
+2. A recursive function **must** move to a base case
+3. Base case is when a recursive function does **NOT** call itself
+4. RecursionError: maximum recursion depth exceeded in comparison
+
+---
+
+# Factorial Recursion
+
+### .center.literal[ 
+`n! = 1 \* 2 \* 3 \*...\*(n-2)\*(n-1)\*n`
+]
+
+.columnA[
+```python
+def factorial(self, n):
+    if n <= 1:
+        return n
+    else:
+        return  n * self.factorial(n - 1) 
+```
+]
+
+.columnB[
+```python
+def factorial_while(self, n):
+    result = 1
+    while(n > 0):
+        result = result * n
+        n = n - 1 
+    return result
+```
+]
+
+---
+
+# Factorial Stack
+```python 
+factorial(5)
+```
+.columnA[
+```python
+*def factorial(self, n):
+    if n <= 1:
+        return n
+    else:
+        return  n * factorial(n - 1) 
+```
+]
+
+.columnB[
+1. factorial(5)
+]
+
+---
+
+# Factorial Stack
+```python 
+factorial(5)
+```
+.columnA[
+```python
+def factorial(self, n):
+*   if n <= 1:
+        return n
+    else:
+        return  n * factorial(n - 1) 
+```
+]
+
+.columnB[
+1. factorial(5)
+2. is 5 >= 1?
+]
+
+---
+
+# Factorial Stack
+```python 
+factorial(5)
+```
+.columnA[
+```python
+def factorial(self, n):
+    if n <= 1:
+        return n
+    else:
+*        return  n * factorial(n - 1) 
+```
+]
+
+.columnB[
+1. factorial(5)
+2. 2. is 5 >= 1?
+3. return 5 x factorial(4)
+]
+
+---
+
+# Factorial Stack
+```python 
+factorial(5)
+```
+.columnA[
+```python
+*def factorial(self, n):
+    if n <= 1:
+        return n
+    else:
+        return  n * factorial(n - 1) 
+```
+]
+
+.columnB[
+1. factorial(5)
+2. 2. is 5 >= 1?
+3. return 5 x factorial(4)
+4. factorial(4)
+]
+
+---
+
+# Boring Math
+.center[
+![boring](/CS/Day3/boringMath.png)
+]
+
+---
+
+# Factorial Stack
+.columnA[
+```python
+def factorial(self, n):
+    if n <= 1:
+*       return n
+    else:
+        return  n * factorial(n - 1) 
+```
+]
+
+.columnB[
+1. factorial(5)
+2. is 5 <= 1?
+3. return 5 x factorial(4)
+4. factorial(4)
+5. is 4 <= 1?
+6. return 5 * 4 * factorial(3)
+7. factorial(3)
+8. is 3 <= 1?
+9. return 5 * 4 * 3 * factorial(2)
+10. factorial(2)
+11. is 2 <= 1?
+12. return 5 * 4 * 3 * 2 * factorial(1)
+13. factorial(1)
+14. is 1 <= 1
+15. return 1
+]
+
+---
+
 # Merge Sort
 .columnA[
 + Efficient, general-purpose, comparison-based sorting algorithm
@@ -115,18 +401,28 @@ class: center, middle
 
 ---
 
+
+# things to review
+- http://interactivepython.org/runestone/static/thinkcspy/IntroRecursion/toctree.html
+
+
 </textarea>
     <script src="/remark/remark-latest.min.js"></script>
     <script src="/remark/jquery-2.2.4.min.js"></script>
     <script src="/remark/highlight.min.js"></script>
     <script type="text/javascript">
       var slideshow = remark.create({
-        highlightStyle: 'zenburn',
+        highlightStyle: 'default',
         ratio: '16:9',
         highlightLines: true
       });
       var hljs = hljs1.initHighlightingOnLoad();
-
+      MathJax.Hub.Config({
+          tex2jax: {
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+          }
+      });
+      MathJax.Hub.Configured();
     </script>
   </body>
 </html>
