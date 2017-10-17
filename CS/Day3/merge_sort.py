@@ -38,6 +38,8 @@ class mergeSort():
             # Middle to end
             b = self.sort(x[middle:])
             return self.merge(a,b)
+
+
 if __name__ == "__main__":
     my_array = [9, 4, 2, 6, 1, 0, 3, 5]
     main = mergeSort()

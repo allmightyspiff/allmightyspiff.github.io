@@ -417,6 +417,11 @@ Write a recursive function that counts down from n to 0.
 
 Print out all directories from a start location
 
+![Trees](/CS/Day3/dir_tree.gif)
+---
+
+# Interview Answer
+
 ```python
 def print_directory_contents(sPath):
     import os                                       
@@ -425,7 +430,8 @@ def print_directory_contents(sPath):
         if os.path.isdir(sChildPath):
             print_directory_contents(sChildPath)
         else:
-            print(sChildPath)
+            continue
+            
 ```
 
 ---
@@ -436,6 +442,7 @@ All Permutations of String
 ---
 
 # Interview Answer
+
 ```python
 def permutations(word):
     if len(word) <= 1:
@@ -453,7 +460,7 @@ def permutations(word):
     return result
 ```
 
---- 
+---
 
 # things to review
 - http://interactivepython.org/runestone/static/thinkcspy/IntroRecursion/toctree.html
