@@ -34,13 +34,14 @@ class mergeSort():
         else:
             middle = len(x)//2
             #Start to Middle
-            a = self.sort(x[:middle])
+            a = x[:middle]
             # Middle to end
-            b = self.sort(x[middle:])
+            b = x[middle:]
             return self.merge(a,b)
 
 
 if __name__ == "__main__":
+
     my_array = [9, 4, 2, 6, 1, 0, 3, 5]
     main = mergeSort()
     result = main.sort(my_array)

@@ -5,7 +5,7 @@ class word_permutation():
         print("PERMUTATE: %s" % word)
         if len(word) <= 1:
             return word
-        #get all permutations of length N-1
+        #get all permutations of leCS/Day3/directory_skeleton.pyngth N-1
         perms=self.permutate(word[1:])
         char=word[0]
         result=[]
