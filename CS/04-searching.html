@@ -116,23 +116,55 @@ def search(number, array)
 ---
 
 # Binary Search Code
+```python
+def binarySearch(self,array, item):
+    first = 0
+    last = len(array)
+
+    while first < last:
+        midpoint = (first + last)//2
+        # print("2midpoint is array[%s] = %s" % (midpoint,array[midpoint]))
+        if array[midpoint] == item:
+            return midpoint
+        else:
+            if item < array[midpoint]:
+                last = midpoint
+            else:
+                first = midpoint + 1
+
+    return False
+```
 
 ---
 
 # You discovered bisect!
 
+https://docs.python.org/3.6/library/bisect.html
+https://github.com/python/cpython/blob/3.6/Lib/bisect.py#L67
+
 ---
 
 # Path Finding
+.columnA[
+>In computer science, A* (pronounced as "A star") is a computer algorithm that is widely used in pathfinding and graph traversal, the process of plotting an efficiently directed path between multiple points, called nodes. It enjoys widespread use due to its performance and accuracy.
 
+]
+.columnB[
+<img width='400px' src='/CS/Day4/a_star.gif'>
+]
+https://en.wikipedia.org/wiki/A*_search_algorithm
 ---
 
-# Path Finding Visualization
+# Path Finding Maze
+
+http://qiao.github.io/PathFinding.js/visual/
 
 ---
 
 # Path Finding Code
+https://www.laurentluce.com/posts/solving-mazes-using-python-simple-recursivity-and-a-search/
 
+https://www.redblobgames.com/pathfinding/a-star/implementation.html
 ---
 
 # Interview Questions
@@ -143,6 +175,7 @@ def search(number, array)
 # things to review
 - https://en.wikipedia.org/wiki/Search_algorithm
 - https://en.wikipedia.org/wiki/Linear_search
+- http://interactivepython.org/runestone/static/pythonds/SortSearch/TheBinarySearch.html
 
 
 </textarea>
