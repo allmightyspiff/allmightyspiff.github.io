@@ -36,14 +36,21 @@ https://en.wikipedia.org/wiki/Sorting_algorithm
 ## Day 4 - Searching
 + Linear Search
 + Binary Search
++ A* Search
 + Interview Exercise
 
 ## Day 5 - How computers really work
 + Memory Management
+    * https://en.wikipedia.org/wiki/Page_table
+    * Buffer Overflow
+    * Garbage Collection
+    * Deep v Shallow Copy
 + Datatypes in memory
     * problems with float
+    * binary arithmetic
 + Time
 + Threads and Processes
+    * Deadlock / Semaphores
 + Interview Exercise
 
 ## Day 6 - Data Structures

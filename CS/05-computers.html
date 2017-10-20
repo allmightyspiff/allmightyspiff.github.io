@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Day 05 - Computer Fun Facts</title>
+    <meta charset="utf-8">
+    <style>
+      body { 
+        font-family: monospace; 
+        font-size: 2em;
+      }
+      h1 {
+        font-family: monospace;
+        color: #F2B632;
+      } 
+      h2 {
+        font-family: monospace;
+        color: #8834A5;
+      }
+      h3 {
+        color: #A57712;
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Courier New'; }
+      .remark-slide-content {
+        background-color: #252839;
+        color: #E1F4EC;
+        font-size: 25px;
+        padding: 0em 1em 1em 1em;
+      }
+    img {background-color: #E1F4EC ;}
+    .columnA {float:left; width: 49%;}
+    .columnB {float:right; width: 49%; }
+    a {color:#A57712; }
+    hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
+    li {margin-bottom: .5em; margin-top: .5em;}
+    blockquote { 
+        color: #F2B632;
+        font-family: Palatino;
+        font-weight: normal;
+        font-size: 35px;
+     }
+     .MathJax {
+     font-size: 8em !important;
+     color: #D69ECA !important;
+    }
+    th {
+      color:#A57712 ;
+    }
+    .brightGold {
+      color: #F2B632
+    }
+    .lightPurple {
+      color: #8834A5 ;
+    }
+    .bigO {
+      height: 475px;
+    }
+    .remark-code{
+        font-size: 20px;
+    }
+    </style>
+<!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
+  </head>
+  <body>
+    <!--#A57712  Dark Gold-->
+    <!--#E1F4EC  White Gold -->
+    <!--#F2B632  Bright Gold -->
+    <!--#27182C  Dark Purple -->
+    <!--#8834A5  Light Purple -->
+    <!--#D69ECA  White Purple -->
+    <textarea id="source">
+
+
+class: center, middle
+# .center[Searching]
+
+---
+
+
+# Memory Management 
+
+---
+
+
+# Garbage Collector
+
+memory freed when reference count goes to 0
+
+
+---
+# Deep and Shallow copies
+```python
+>>> a = 10000
+>>> b = 10000
+>>> a is b
+False
+>>> a = 5
+>>> b = 5
+>>> a is b
+True
+```
+---
+
+# Memory Profiling
+
+1. psutil
+2. memory_profiler
+3. mprof
+4. objgraph
+5. heapy / meliae
+
+---
+
+# Datatypes in memory
+- how big are certain datatypes
+- binary explained
+- float
+- binary math tricks
+
+# Time
+- How computers tell time
+- Time update servers
+- GPS + time
+- time zones
+- pro tips for dealing with users time
+
+# Threads and processes
+- Difference between the 2
+- dealing with parallelism
+- dead locks
+- semaphores
+
+# Interview Exercise
+
+# Things to read
+## Everything You Always Wanted to Know About Memory in Python But Were Afraid to Ask
+- https://www.youtube.com/watch?v=hf4MKeP5oxg
+
+
+</textarea>
+    <script src="/remark/remark-latest.min.js"></script>
+    <script src="/remark/jquery-2.2.4.min.js"></script>
+    <script src="/remark/highlight.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'default',
+        ratio: '16:9',
+        highlightLines: true
+      });
+      var hljs = hljs1.initHighlightingOnLoad();
+      MathJax.Hub.Config({
+          tex2jax: {
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+          }
+      });
+      MathJax.Hub.Configured();
+    </script>
+  </body>
+</html>

@@ -44,19 +44,19 @@ class binary_search():
         raise ValueError
 
 if __name__ == "__main__":
-    my_array = range(0, 10000)
+    my_array = range(0, 100000)
     main = binary_search()
 
     now = time.time()
-    for i in range(0,10000):
+    for i in range(0,100000):
         location = main.binarySearch(my_array, i)
         if location is False:
-            print("NOT FOUN %s" % i)
+            print("NOT FOUND %s" % i)
     then = time.time()
     print("binarySearch took %ss" % (then - now ))
 
     now = time.time()
-    for i in range(0,10000):
+    for i in range(0,100000):
         location = main.search_r(my_array, i)
         if location is False:
             print("NOT FOUN %s" % i)
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     print("search_r took %ss" % (then - now) )
 
     now = time.time()
-    for i in range(0,10000):
+    for i in range(0,100000):
         location = main.bisect_search(my_array, i)
         if location is False:
             print("NOT FOUN %s" % i)
