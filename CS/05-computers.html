@@ -84,7 +84,9 @@ class: center, middle
 
 # Garbage Collector
 
-memory freed when reference count goes to 0
+All variables are kept in python's memory heap 
+when a variables reference count goes to 0, it is freed
+circular references can cause a variable to never be freedx
 
 
 ---
@@ -117,6 +119,12 @@ True
 - float
 - binary math tricks
 
+---
+
+# Non-binary systems
+
+---
+
 # Time
 - How computers tell time
 - Time update servers
@@ -124,13 +132,19 @@ True
 - time zones
 - pro tips for dealing with users time
 
+---
+
 # Threads and processes
 - Difference between the 2
 - dealing with parallelism
 - dead locks
 - semaphores
 
+---
+
 # Interview Exercise
+
+---
 
 # Things to read
 ## Everything You Always Wanted to Know About Memory in Python But Were Afraid to Ask
