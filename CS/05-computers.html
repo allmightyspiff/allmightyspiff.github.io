@@ -107,6 +107,8 @@ class: center, middle
   - dont use for $
 
 ???
+http://cstl-csm.semo.edu/xzhang/Class%20Folder/CS280/Workbook_HTML/FLOATING_tut.htm
+
 In single precision floating point, you get 8 bits in which to store the exponent. Instead of storing it as a signed two's complement number, it was decided that it'd be easier to just add 127 to the exponent (since the lowest it could be in 8 bit signed is -127) and just store it as an unsigned number. If the stored value is greater than the bias, that means the value of the exponent is positive, if it's lower than the bias, it's negative, if it's equal, it's zero.
 
 
@@ -224,22 +226,25 @@ All of these memory tricks make python less than ideal for high intensity worklo
 ---
 
 
-
-# Non-binary systems
-
----
-
 # Time
+>A man with a watch knows what time it is. A man with two watches is never sure
+
 - How computers tell time
 - Time update servers
 - GPS + time
 - time zones
 - pro tips for dealing with users time
+    + https://www.timeanddate.com/worldclock/timezone/utc
+    + epoch time
+
+???
+"One second is the time that elapses during 9,192,631,770 cycles of the radiation produced by the transition between two levels of the cesium 133 atom."
 
 ---
 
 # Threads and processes
-- Difference between the 2
+- Difference between the threads and processes 
+    + CPython implementation detail: In CPython, due to the Global Interpreter Lock, only one thread can execute Python code at once
 - dealing with parallelism
 - dead locks
 - semaphores
@@ -286,8 +291,10 @@ gc.disable() - Disables automatic garbage collection.
 
 ---
 # Things to read
-## Everything You Always Wanted to Know About Memory in Python But Were Afraid to Ask
+
 - https://www.youtube.com/watch?v=hf4MKeP5oxg
+- http://wltrimbl.github.io/2014-06-10-spelman/intermediate/python/04-multiprocessing.html
+- https://devopslog.wordpress.com/2012/04/15/mergesort-example-using-python-multiprocessing/
 
 
 </textarea>
