@@ -81,15 +81,47 @@ class: center, middle
 - OS reservation
 - 4k page size
 - SWAP 
+- Memory Heap
+  + Memory management in Python involves a private heap containing all Python objects and data structures
+  + It is important to understand that the management of the Python heap is performed by the interpreter itself and that the user has no control over it
 - Out of Memory
 
 ---
 
-# Datatypes in memory
-- how big are certain datatypes
-- binary explained
-- float
-- binary math tricks
+# Binary Things
+- Binary
+  + 100 = (1 `*` 10^2) + (0 `*` 10^1) + (0 `*` 10^0)
+  + 100 = (1 `*` 2^2) + (0 `*` 2^1) + (0 `*` 2^0)
+- Float
+  - https://docs.python.org/3/tutorial/floatingpoint.html
+
+| Binary Value | Biased Exponent  | Sign, Exponent, Mantissa |
+| --- | --- | --- |
+| -1.11  | 127 | 1  01111111  11000000000000000000000|
+| +1101.101 | 130 |0  10000010  10110100000000000000000|
+| -.00101 | 124 |1  01111100  01000000000000000000000|
+| +100111.0 | 132 |0  10000100  00111000000000000000000|
+| +.0000001101011 | 120| 0  01111000  10101100000000000000000|
+ 
+  -  1/10 = 0.0001100110011001100110011001100110011001100110011..
+  - dont use for $
+
+???
+In single precision floating point, you get 8 bits in which to store the exponent. Instead of storing it as a signed two's complement number, it was decided that it'd be easier to just add 127 to the exponent (since the lowest it could be in 8 bit signed is -127) and just store it as an unsigned number. If the stored value is greater than the bias, that means the value of the exponent is positive, if it's lower than the bias, it's negative, if it's equal, it's zero.
+
+
+---
+
+# Binary Things
+
+- Bit Wise
+  - https://wiki.python.org/moin/BitwiseOperators
+  - x << y  => x `*` 2^y.
+  - x >> y  => x//2^y
+  - x & y => *AND*  101 & 110 = 100
+  - x | y => *OR* 101 | 110 = 111
+  - ~ x => -x - 1   ~ 101 = 010
+  - x ^ y => *EXCLUSIVE OR* Each bit of the output is the same as the corresponding bit in x if that bit in y is 0, and it's the complement of the bit in x if that bit in y is 1.
 
 ---
 
@@ -99,6 +131,10 @@ class: center, middle
 - when a variables reference count goes to 0, it is freed
 - circular references can cause a variable to never be freed
 - C/C++ uses malloc and free, making the programmer clean up their mess
+
+???
+For log running programs, garbage collection is a must.
+for iterating through loops and functions, garbage collection is a must
 
 ---
 
@@ -182,6 +218,9 @@ Watch out for this in for loops
 4. objgraph
 5. heapy / meliae
 
+???
+All of these memory tricks make python less than ideal for high intensity workloads, but good for almost everything else.
+
 ---
 
 
@@ -207,10 +246,45 @@ Watch out for this in for loops
 
 ---
 
-# Interview Exercise
+# MultiProcessing
+```python
+# importing the multiprocessing module
+import multiprocessing
+ 
+def print_cube(num):
+    print("Cube: {}".format(num * num * num))
+ 
+def print_square(num):
+    print("Square: {}".format(num * num))
+ 
+if __name__ == "__main__":
+    # creating processes
+    p1 = multiprocessing.Process(target=print_square, args=(10, ))
+    p2 = multiprocessing.Process(target=print_cube, args=(10, ))
+ 
+    p1.start()
+    p2.start()
+ 
+    p1.join()
+    p2.join()
+    print("Done!")
+```
+---
+
+# How is memory managed in python?
+
+???
+
+Memory management in Python involves a private heap containing all Python objects and data structures. Interpreter takes care of Python heap and that the programmer has no access to it. The allocation of heap space for Python objects is done by Python memory manager. The core API of Python provides some tools for the programmer to code reliable and more robust program. Python also has a build-in garbage collector which recycles all the unused memory. When an object is no longer referenced by the program, the heap space it occupies can be freed. The garbage collector determines objects which are no longer referenced by the sprogram frees the occupied memory and make it available to the heap space. The gc module defines functions to enable /disable                         garbage collector:
+gc.enable() -Enables automatic garbage collection.
+gc.disable() - Disables automatic garbage collection.
 
 ---
 
+
+# Why multiprocessing?
+
+---
 # Things to read
 ## Everything You Always Wanted to Know About Memory in Python But Were Afraid to Ask
 - https://www.youtube.com/watch?v=hf4MKeP5oxg
