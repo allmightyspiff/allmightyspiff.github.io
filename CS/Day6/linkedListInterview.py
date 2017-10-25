@@ -67,7 +67,7 @@ class linked_list():
             self.tail = node 
 
     def insert(self, node, index):
-        if self.head = None:
+        if self.head == None:
             self.add_node(node)
         try:
             l_node = self[index - 1]
