@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Day 06 - Data Structures</title>
+    <meta charset="utf-8">
+    <style>
+      body { 
+        font-family: monospace; 
+        font-size: 2em;
+      }
+      h1 {
+        font-family: monospace;
+        color: #F2B632;
+      } 
+      h2 {
+        font-family: monospace;
+        color: #8834A5;
+      }
+      h3 {
+        color: #A57712;
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Courier New'; }
+      .remark-slide-content {
+        background-color: #252839;
+        color: #E1F4EC;
+        font-size: 25px;
+        padding: 0em 1em 1em 1em;
+      }
+    img {background-color: #E1F4EC ;}
+    .columnA {float:left; width: 49%;}
+    .columnB {float:right; width: 49%; }
+    a {color:#A57712; }
+    hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
+    li {margin-bottom: .5em; margin-top: .5em;}
+    blockquote { 
+        color: #F2B632;
+        font-family: Palatino;
+        font-weight: normal;
+        font-size: 35px;
+     }
+     .MathJax {
+     font-size: 8em !important;
+     color: #D69ECA !important;
+    }
+    th {
+      color:#A57712 ;
+    }
+    .brightGold {
+      color: #F2B632
+    }
+    .lightPurple {
+      color: #8834A5 ;
+    }
+    .bigO {
+      height: 475px;
+    }
+    .remark-code{
+        font-size: 20px;
+    }
+    </style>
+<!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
+  </head>
+  <body>
+    <!--#A57712  Dark Gold-->
+    <!--#E1F4EC  White Gold -->
+    <!--#F2B632  Bright Gold -->
+    <!--#27182C  Dark Purple -->
+    <!--#8834A5  Light Purple -->
+    <!--#D69ECA  White Purple -->
+    <textarea id="source">
+
+
+class: center, middle
+# .center[Data Structures]
+
+---
+
+#  Data Structuresß
++ Intro to Data Structures
++ Linked Lists
++ Queues
++ Stacks
++ Interview Exercise
+
+---
+
+# What is a Data Structure?
+>In computer science, a data structure is a particular way of organizing data in a computer so that it can be used efficiently. Generally built upon simpler primitive data types:
+
+--Donald Knuth, The Art of Computer Programming, vol. 1. 
+???
+useful to know since sometimes the built in data structures don't do exactly what you want.
+for example overwriting next() to get data from a DB instead of RAM
+---
+
+# Linked Lists
+- Collection of nodes.
+- Each node has a pointed to the next
+- Easy to expand, insert, remove
+- Takes O(n) time to get to an element
+    + array takes O(1) time to get to an element
+
+https://www.codefellows.org/blog/implementing-a-singly-linked-list-in-python/
+---
+
+# Linked List Code
+```python
+class Node():
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
+class linked_list():
+    def __init__(self):
+        self.head = None
+        self.current = None
+        self.tail = None
+    def add_node(self, node):
+        if self.head is None:
+            self.head = node
+            self.tail = node
+        else:
+            self.tail.next = node
+            self.tail = node 
+if __name__ == "__main__":
+    my_list = linked_list()
+    my_list.add_node(Node('a'))
+    my_list.add_node(Node('b'))
+    my_list.add_node(Node(100))
+    print(my_list.head.next.data)
+```
+---
+
+# `__str__` method
+```python
+    def __str__(self):
+        if self.head is None:
+            return None
+        start = self.head
+        out = "%s" % (start)
+        while start.next != None:
+            start = start.next
+            out += ", %s" % str(start)
+        return out
+
+```
+```python
+    print(my_list)
+```
+```bash
+a, b, 100
+[Finished in 0.1s]
+```
+
+---
+# Iteration
+```python
+    def __iter__(self):
+        self.current = None
+        return self
+
+    def next(self):
+        if self.head and not self.current:
+            self.current = self.head
+            return self.current
+        elif self.current.next:
+            self.current = self.current.next
+            return self.current
+        else:
+            raise StopIteration
+```
+```python
+    for l in my_list:
+        print(l)
+```
+---
+
+# Doubly Linked List
+```python
+class Node():
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
+        self.back = None
+    def __str__(self):
+        return str(self.data)
+class linked_list():
+    def add_node(self, node):
+        if self.head is None:
+            self.head = node
+            self.tail = node
+        else:
+            node.back = self.tail
+            self.tail.next = node
+            self.tail = node 
+```
+???
+Watch out for loops
+
+---
+# Queues
+
+---
+
+# Stacks
+
+---
+
+# Data Structures in Python
+## Lists
+## Dictionaries
+
+---
+# Interview Exercise
+Make this code work from our Linked List Example
+```python
+    my_list = linked_list()
+    my_list.add_node(Node('a'))
+    print(my_list[0])
+```
+```bash
+AttributeError: linked_list instance has no attribute '__getitem__'
+```
+https://docs.python.org/3.6/reference/datamodel.html
+
+<pre>
+object.__getitem__(self, key)
+Called to implement evaluation of self[key]. accepted keys should be integers. 
+special interpretation of negative indexes is up to the __getitem__() method. 
+If key is of an inappropriate type, TypeError may be raised; 
+If key is outside of bounds, IndexError should be raised. 
+For mapping types, if key is missing, KeyError should be raised.
+</pre>
+---
+
+# Interview Exercise
+Implement linked_list.insert(node,index)
+```python
+    my_list = linked_list()
+    my_list.insert(Node('asd'),0)
+    my_list.add_node(Node('a'))
+    my_list.add_node(Node('b'))
+    my_list.add_node(Node(100))
+    my_list.insert(Node('aFFFF'),0)
+```
+
+</textarea>
+    <script src="/remark/remark-latest.min.js"></script>
+    <script src="/remark/jquery-2.2.4.min.js"></script>
+    <script src="/remark/highlight.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'default',
+        ratio: '16:9',
+        highlightLines: true
+      });
+      var hljs = hljs1.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
