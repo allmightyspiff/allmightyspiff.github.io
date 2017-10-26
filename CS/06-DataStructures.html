@@ -133,6 +133,10 @@ if __name__ == "__main__":
 
 # `__str__` method
 ```python
+class Node():
+    def __str__(self):
+        return str(self.data)
+class linked_list():
     def __str__(self):
         if self.head is None:
             return None
@@ -228,13 +232,17 @@ Lists are linked lists, but optimised to behave like a stack.
 ---
 # Data Structures in Python
 ## Dictionaries
-AKA associative arrays
+https://docs.python.org/3/library/stdtypes.html#dict
 >The main operations on a dictionary are storing a value with some key and extracting the value given the key
 
-
+>A mapping object maps hashable values to arbitrary objects. Mappings are mutable objects. There is currently only one standard mapping type, the dictionary.
+---
+# Data Structures in Python
 ## Sets
+https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset
 > A set is an unordered collection with no duplicate elements. Basic uses include membership testing and eliminating duplicate entries
 
+>Like other collections, sets support x in set, len(set), and for x in set. Being an unordered collection, sets do not record element position or order of insertion. Accordingly, sets do not support indexing, slicing, or other sequence-like behavior.
 ---
 # Interview Exercise
 Make this code work from our Linked List Example
