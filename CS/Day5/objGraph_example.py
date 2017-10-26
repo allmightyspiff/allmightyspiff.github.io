@@ -1,5 +1,3 @@
-from pprint import pprint as pp
-import time
 import objgraph
 
 if __name__ == "__main__":

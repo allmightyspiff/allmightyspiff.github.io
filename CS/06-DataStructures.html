@@ -199,16 +199,41 @@ Watch out for loops
 
 ---
 # Queues
+- Linked lists that only add nodes at the tail, and remove from the head
+- implemented in Lib/queue.py
+- https://docs.python.org/3/library/queue.html
+- Great for job scheduling
 
 ---
 
 # Stacks
+- Linked list that only add and remove nodes from the tail
+- push() adds items
+- pop() removes and returns an item
 
+---
+
+# Dequeue
+>Deques are a generalization of stacks and queues (the name is pronounced “deck” and is short for “double-ended queue”). Deques support thread-safe, memory efficient appends and pops from either side of the deque with approximately the same O(1) performance in either direction.
 ---
 
 # Data Structures in Python
 ## Lists
+https://docs.python.org/3.1/tutorial/datastructures.html
+
+Lists are linked lists, but optimised to behave like a stack.
+
+>The list methods make it very easy to use a list as a stack, where the last element added is the first element retrieved (“last-in, first-out”). To add an item to the top of the stack, use append(). To retrieve an item from the top of the stack, use pop() without an explicit index
+
+---
+# Data Structures in Python
 ## Dictionaries
+AKA associative arrays
+>The main operations on a dictionary are storing a value with some key and extracting the value given the key
+
+
+## Sets
+> A set is an unordered collection with no duplicate elements. Basic uses include membership testing and eliminating duplicate entries
 
 ---
 # Interview Exercise
