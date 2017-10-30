@@ -1,5 +1,6 @@
-# Computer Science Elective
+add some things about programming patters
 
+# Computer Science Elective
 
 ## Day 1 - Introduction
 + Introduction to class. Why are we here? What will we learn?
@@ -61,14 +62,18 @@ https://en.wikipedia.org/wiki/Sorting_algorithm
 + Interview Exercise
 
 ## Day 7 - More Data Structures
++ Programming Patterns Into
 + Hash Tables
+    * http://interactivepython.org/courselib/static/pythonds/SortSearch/Hashing.html
+    * https://mail.python.org/pipermail/python-list/2000-March/048085.html
 + Trees
 + Binary Search Tree
 + Interview Exercise
 
 ## Day 8 - So many Data Structures
 + Binary Search Tree, Continued
-+ Balancing Trees
++ Balancing Trees / AVL Trees
+    * https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree
 + B Tree
 + Red Black Tree
 + Interview Exercise

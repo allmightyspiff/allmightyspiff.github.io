@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Day 07 - Hash Tables and Trees</title>
+    <meta charset="utf-8">
+    <style>
+      body { 
+        font-family: monospace; 
+        font-size: 2em;
+      }
+      h1 {
+        font-family: monospace;
+        color: #F2B632;
+      } 
+      h2 {
+        font-family: monospace;
+        color: #8834A5;
+      }
+      h3 {
+        color: #A57712;
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Courier New'; }
+      .remark-slide-content {
+        background-color: #252839;
+        color: #E1F4EC;
+        font-size: 25px;
+        padding: 0em 1em 1em 1em;
+      }
+    img {background-color: #E1F4EC ;}
+    .columnA {float:left; width: 49%;}
+    .columnB {float:right; width: 49%; }
+    a {color:#A57712; }
+    hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
+    li {margin-bottom: .5em; margin-top: .5em;}
+    blockquote { 
+        color: #F2B632;
+        font-family: Palatino;
+        font-weight: normal;
+        font-size: 35px;
+     }
+     .MathJax {
+     font-size: 8em !important;
+     color: #D69ECA !important;
+    }
+    th {
+      color:#A57712 ;
+    }
+    .brightGold {
+      color: #F2B632
+    }
+    .lightPurple {
+      color: #8834A5 ;
+    }
+    .bigO {
+      height: 475px;
+    }
+    .remark-code{
+        font-size: 20px;
+    }
+    </style>
+<!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
+  </head>
+  <body>
+    <!--#A57712  Dark Gold-->
+    <!--#E1F4EC  White Gold -->
+    <!--#F2B632  Bright Gold -->
+    <!--#27182C  Dark Purple -->
+    <!--#8834A5  Light Purple -->
+    <!--#D69ECA  White Purple -->
+    <textarea id="source">
+
+
+class: center, middle
+# .center[Data Structures 2]
+
+---
+
+# Data Structures
++ Programming Patters
++ Hash Tables
++ Trees
++ Binary Trees
++ Interview Exercise
+
+---
+
+# Software Design Patters
++ Creational Patterns
+    * The creational patterns aim to separate a system from how its objects are created, composed, and represented.
++ Structural Patterns
+    * ease the design by identifying a simple way to realize relationships between entities.
++ Behavioral Patterns
+    *  identify common communication patterns between objects and realize these patterns
++ Concurrency Patterns
+    * deal with the multi-threaded programming paradigm.
+
+---
+# Thread Pool Pattern
+>In computer programming, a thread pool is a software design pattern for achieving concurrency of execution in a computer program. Often also called a replicated workers or worker-crew model
+
+---
+
+# Thread Pool Application
+
+## Edit Profile
+- Queue for DB updates
+- Queue for sending email
+
+## Batch Processing
+- Queue for each job to be done
+
+---
+
+# Thread Pool Dangers
+- Pool items are usually only in memory
+- Too much parallelism
+
+---
+
+# Hash Tables
+- Elements can be accessed in O(1) time
+- Requires a hash function and a unique key to identify elements
+
+| Id | Memory Location |
+| --- | --- |
+|0 |0x0001 |
+|1 |0x0002 |
+|2 |0x000A |
+|3 |0x00FF |
+|4 |0x0A01 |
+|5 |null   |
+|6 |null   |
+|7 |null   |
+
+---
+
+# Hash Functions
+- Easy to compute: It should be easy to compute and must not become an algorithm in itself.
+- Uniform distribution: It should provide a uniform distribution across the hash table and should not result in clustering.
+- Less collisions: Collisions occur when pairs of elements are mapped to the same hash value. These should be avoided.
+- ```hash(int(key) % len(hash_table))```
+- An object is hashable if it has a hash value which never changes during its lifetime (it needs a __hash__() method), and can be compared to other objects (it needs an __eq__() method). Hashable objects which compare equal must have the same hash value.
+ 
+---
+
+# Hash Collisions
+https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-tables/tutorial/
+- Separate Chaining (open hashing)
+- Probing (closed hashing)
+
+---
+
+# Hash tables in real life
+https://www.laurentluce.com/posts/python-dictionary-implementation/
+- Dictionaries
+- Maps
+- collections.OrderedDict – Remember the insertion order of keys
+- collections.defaultdict – Return default values for missing keys
+- collections.ChainMap – Search multiple dictionaries as a single mapping
+
+---
+
+# Trees
+- Root and Parent
+- Child and Siblings
+- Branches
+- Leaves / Nodes
+- Height
+---
+
+# Tree Uses
+- Representing hierarchical data
+- Storing data in a way that makes it efficiently searchable (see binary search tree and tree traversal)
+- Representing sorted lists of data
+- As a workflow for compositing digital images for visual effects
+- Routing algorithms
+
+???
+### Routing
+When applying link-state algorithms, a graphical map of the network is the fundamental data used for each node. To produce its map, each node floods the entire network with information about the other nodes it can connect to. Each node then independently assembles this information into a map. Using this map, each router independently determines the least-cost path from itself to every other node using a standard shortest paths algorithm such as Dijkstra's algorithm. The result is a tree graph rooted at the current node, such that the path through the tree from the root to any other node is the least-cost path to that node. This tree then serves to construct the routing table, which specifies the best next hop to get from the current node to any other node.
+
+---
+
+# Binary Trees
+https://en.wikipedia.org/wiki/Binary_tree
+http://cslibrary.stanford.edu/110/BinaryTrees.html
+each node only has a left and right node
+- Depth First
+- Breadth First
+
+---
+
+
+# Interview Exercise
+
+https://www.youtube.com/watch?v=GJdiM-muYqc
+
+# Interview Exercise
+http://www.geeksforgeeks.org/print-left-view-binary-tree/
+http://www.geeksforgeeks.org/find-distance-two-nodes-binary-search-tree/
+http://codercareer.blogspot.com/2011/09/interview-question-no-1-binary-search.html
+
+</textarea>
+    <script src="/remark/remark-latest.min.js"></script>
+    <script src="/remark/jquery-2.2.4.min.js"></script>
+    <script src="/remark/highlight.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'default',
+        ratio: '16:9',
+        highlightLines: true
+      });
+      var hljs = hljs1.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

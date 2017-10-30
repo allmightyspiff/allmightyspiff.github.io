@@ -27,9 +27,7 @@ class linked_list():
             out += ", %s" % str(start)
         return out
 
-    def __iter__(self):
-        self.current = None
-        return self
+
 
     def __getitem__(self,key):
         if not isinstance(key, int):
@@ -44,7 +42,9 @@ class linked_list():
                 raise IndexError
             else:
                 count = count + 1
-
+    def __iter__(self):
+        self.current = None
+        return self
 
     def next(self):
         if self.head and not self.current:
@@ -93,7 +93,8 @@ if __name__ == "__main__":
     my_list.add_node(Node('b'))
     my_list.add_node(Node(100))
     # print(my_list[2])
-    
-    print(my_list)
+    for l in my_list:
+        print l 
+    # print(my_list)
     
     
