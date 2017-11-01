@@ -71,6 +71,7 @@ https://en.wikipedia.org/wiki/Sorting_algorithm
 + Interview Exercise
 
 ## Day 8 - So many Data Structures
++ Programming Pattern
 + Binary Search Tree, Continued
 + Balancing Trees / AVL Trees
     * https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree
