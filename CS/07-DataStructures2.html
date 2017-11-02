@@ -156,6 +156,12 @@ https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-
 # Distributed and Consistent Hashing
 http://theory.stanford.edu/~tim/s17/l/l1.pdf
 - The goal of consistent hashing: we want hash table-type functionality with the additional property that almost all objects stay assigned to the same cache even as the number n of caches changes.
+- Consistent hashing, in a nutshell, does this:
+- Stop trying to keep one value at exactly one location. Let one location house multiple values from multiple keys.
+- Don’t number your locations consecutively. Give them effectively random numbers between 0 and infinity.
+- Don’t compute hash % number of locations. Instead, find the smallest location number greater than your key’s hash, and put it there.
+- If your hash is greater than all locations, put it in the lowest-numbered location.
+- I start with five locations randomly numbered 1, 20, 41, 1024, 2016. Given a key with hash 1013, I put it in the location numbered 1024. Given a key with hash 2017, I put it in the location numbered 1.
 ---
 
 # Hash tables in real life
