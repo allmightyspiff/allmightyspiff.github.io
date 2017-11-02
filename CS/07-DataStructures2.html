@@ -136,18 +136,20 @@ class: center, middle
 ---
 
 # Hash Functions
+```
+hash(int(key) % len(hash_table))
+```
 - Easy to compute: It should be easy to compute and must not become an algorithm in itself.
 - Uniform distribution: It should provide a uniform distribution across the hash table and should not result in clustering.
-- Less collisions: Collisions occur when pairs of elements are mapped to the same hash value. These should be avoided.
-- ```hash(int(key) % len(hash_table))```
+- Less collisions: Collisions occur when pairs of elements are mapped to the same hash value. These should be avoided. 
 - An object is hashable if it has a hash value which never changes during its lifetime (it needs a __hash__() method), and can be compared to other objects (it needs an __eq__() method). Hashable objects which compare equal must have the same hash value.
- 
----
 
+---
 # Hash Collisions
 https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-tables/tutorial/
 - Separate Chaining (open hashing)
 - Probing (closed hashing)
+- Growing the Hash Table
 
 ---
 
@@ -158,6 +160,7 @@ https://www.laurentluce.com/posts/python-dictionary-implementation/
 - collections.OrderedDict – Remember the insertion order of keys
 - collections.defaultdict – Return default values for missing keys
 - collections.ChainMap – Search multiple dictionaries as a single mapping
+
 
 ---
 
@@ -185,6 +188,8 @@ When applying link-state algorithms, a graphical map of the network is the funda
 # Binary Trees
 https://en.wikipedia.org/wiki/Binary_tree
 http://cslibrary.stanford.edu/110/BinaryTrees.html
+https://en.wikipedia.org/wiki/Tree_traversal
+
 each node only has a left and right node
 - Depth First
 - Breadth First
@@ -193,13 +198,47 @@ each node only has a left and right node
 
 
 # Interview Exercise
-
 https://www.youtube.com/watch?v=GJdiM-muYqc
+>Find the first duplicate letter in a string
+
+```
+string = Abcdefb
+duplicate_letter = find_duplicate(string)
+print(duplicate_letter)
+>>>b
+```
+
+
+---
+
+# Interview Exercise
+>Sort a deck of cards
+```python
+class deck():
+    def __init__(self):
+        cards = ['2','3','4','5','6','7','8','9','10','J','Q','K','A']
+        suites = ['H','S','C','D']
+        self.deck = []
+        for s in suites:
+            for c in cards:
+                self.deck.append(s + c)
+    def shuffle(self):
+        ?
+```
+---
+
+# Interview Exercise
+>Find the height of a binary tree
+
+---
 
 # Interview Exercise
 http://www.geeksforgeeks.org/print-left-view-binary-tree/
 http://www.geeksforgeeks.org/find-distance-two-nodes-binary-search-tree/
 http://codercareer.blogspot.com/2011/09/interview-question-no-1-binary-search.html
+> Print the left view of a binary tree
+
+---
 
 </textarea>
     <script src="/remark/remark-latest.min.js"></script>
