@@ -94,6 +94,21 @@ class: center, middle
 - Factory Method
   + https://en.wikipedia.org/wiki/Factory_method_pattern
 
+>Factories and interfaces allow for a lot more long term flexibility. It allows for a more decoupled - and therefore more testable - design. 
+
+```python
+class Server(object):
+    def __init__(self,id):
+        self.id = id
+        serverRecord = select * from db.servers where id=self.id
+        serverType = getattr(servers,serverRecord['type'])
+        return serverType()
+class DellServer(Server):
+    ...
+class SupermicroServer(Server):
+    ...
+```
+
 ---
 
 # Anti Patterns
@@ -187,7 +202,7 @@ http://www.geeksforgeeks.org/red-black-tree-set-1-introduction-2/
 - Proivdes worst-case gaurantee for insert delete and search making it ideal for realtime applications
 - Used by linux "Completely Fair Scheduler"
 - AVL trees can be considered Red/Black, but more strictly balanced
-
+- https://www.youtube.com/watch?v=5IBxA-bZZH8
 ---
 
 
@@ -233,6 +248,7 @@ https://en.wikipedia.org/wiki/Trie
 ---
 
 # Huffman Lossless JPEG
+https://www.youtube.com/watch?v=umTbivyJoiI
 https://www.print-driver.com/stories/huffman-coding-jpeg
 http://www.whydomath.org/node/wavlets/basicjpg.html
 https://en.wikipedia.org/wiki/JPEG
