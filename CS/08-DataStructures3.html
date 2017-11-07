@@ -30,6 +30,8 @@
     img {background-color: #E1F4EC ;}
     .columnA {float:left; width: 49%;}
     .columnB {float:right; width: 49%; }
+    .columnD {float:right; width: 40%; }
+    .columnC {float:right; width: 60%; }
     a {color:#A57712; }
     hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
     li {margin-bottom: .5em; margin-top: .5em;}
@@ -101,17 +103,136 @@ https://en.wikipedia.org/wiki/Anti-pattern
 Cargo Cult Programming
 ---
 
-# Balancing Binary Trees
-
+# Data Structure Review
+- Linked Lists
+    + Iterating through data
+    + Fast(ish) inserts, fast append
+    + Efficient Storage
+    + Order of data is important
+- Hash Tables
+    + Good for random access
+    + takes n*2 space
+    + Useful when keys are more important than order
 ---
 
-# B Tree
+# Balancing Binary Trees
+.columnD[
+```python
+class Node():
+    def __init__(self, key):
+        self.right = None
+        self.left = None
+        self.key = key
+```
+]
+.columnC[
+```python
+class BTree():
+    def __init__(self):
+        self.root = None
+    def add_node(self, key, node=None):
+        if node is None: # Starting condition
+            node = self.root
+        if self.root is None: # Empty Tree
+            self.root = Node(key)
+        else:
+            if key <= node.key: # LEFT insert
+                if node.left is None:
+                    node.left = Node(key)
+                    return
+                else: # Recurse into the left
+                    return self.add_node(key, node=node.left)
+
+            else:  # RIGHT insert
+                if node.right is None:
+                    node.right = Node(key)
+                    return
+                else: # Recurse into the right
+                    return self.add_node(key, node.right)
+```
+]
+---
+
+# Balancing Binary Trees
+http://www.stoimen.com/blog/2012/07/03/computer-algorithms-balancing-a-binary-search-tree/
+- Rotation
+- Random Inserts
+- optimal search time is O(logn), unbalanced can be O(n)
+- most self-balanced BST algorithms keep the height within a constant factor of this lower bound
+- Day-Stout-Warren algorithm
+    + rotate tree into an ordered linked list
+    + rotate tree into balanced
+- Ideal height = log_2(Nodes) 
+---
+
+# Balanced Binary Tree uses
+- iterating through Key:Value (dictionary) where order is important. 
+    + Self-balancing BSTs have better worst-case lookup performance than hash tables (O(log n) compared to O(n)), but have worse average-case performance (O(log n) compared to O(1)).
++ Maintain ordered lists
++ Priority Queues
+---
+
+# AVL Tree
+
+- Balanced on every insert / delete
 
 ---
 
 # Red Black Tree
+http://www.geeksforgeeks.org/red-black-tree-set-1-introduction-2/
+.columnA[
+1. Every node has a color either red or black.
+2. Root of tree is always black.
+3. There are no two adjacent red nodes (A red node cannot have a red parent or red child).
+4. Every path from root to a NULL node has same number of black nodes.
+]
+.columnB[
+<img width=500px src='/CS/Day8/redBlack.png'>
+]
 ---
 
+# Red Black Tree
+- Proivdes worst-case gaurantee for insert delete and search making it ideal for realtime applications
+- Used by linux "Completely Fair Scheduler"
+- AVL trees can be considered Red/Black, but more strictly balanced
+
+---
+
+# Red Black Code
+https://en.wikipedia.org/wiki/Red%E2%80%93black_tree
+https://www.cs.auckland.ac.nz/software/AlgAnim/red_black.html
+https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
+---
+
+# AVL v Red/Black
+Red Black are optimal when doing frequent insert/delete compared to search
+---
+
+# Binary Heap
+.columnA[
+A binary heap is defined as a binary tree with two additional constraints:
+
+*Shape property*: a binary heap is a complete binary tree; that is, all levels of the tree, except possibly the last one (deepest) are fully filled, and, if the last level of the tree is not complete, the nodes of that level are filled from left to right.
+
+*Heap property*: the key stored in each node is either greater than or equal to (≥) or less than or equal to (≤) the keys in the node's children, according to some total order.
+]
+.columnB[
+<img src='/CS/Day8/heap.png'>
+]
+---
+
+# Trees in compression
+---
+# Tree applications
+- HTML DOM
+- Syntax Trees
+- Huffman Coding / Compression
+- JPEG compression
+- Spell Checker
+- Undo Function
+- Directory Tree
+
+---
 # Trees in comparison
 ---
 

@@ -85,5 +85,6 @@ if __name__ == "__main__":
     tree.add_node(7)
     tree.add_node(6)
     tree.add_node(11)
-    print(tree)
-    tree.printTree()
+    # print(tree)
+    # tree.printTree()
+    print("Height is %s" % tree.height(tree.root))
