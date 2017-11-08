@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Day 09 - Networking</title>
+    <meta charset="utf-8">
+    <style>
+      body { 
+        font-family: monospace; 
+        font-size: 2em;
+      }
+      h1 {
+        font-family: monospace;
+        color: #F2B632;
+      } 
+      h2 {
+        font-family: monospace;
+        color: #8834A5;
+      }
+      h3 {
+        color: #A57712;
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Courier New'; }
+      .remark-slide-content {
+        background-color: #252839;
+        color: #E1F4EC;
+        font-size: 25px;
+        padding: 0em 1em 1em 1em;
+      }
+    img {background-color: #E1F4EC ;}
+    .columnA {float:left; width: 49%;}
+    .columnB {float:right; width: 49%; }
+    .columnD {float:right; width: 40%; }
+    .columnC {float:right; width: 60%; }
+    a {color:#A57712; }
+    hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
+    li {margin-bottom: .5em; margin-top: .5em;}
+    blockquote { 
+        color: #F2B632;
+        font-family: Palatino;
+        font-weight: normal;
+        font-size: 35px;
+     }
+     .MathJax {
+     font-size: 8em !important;
+     color: #D69ECA !important;
+    }
+    th {
+      color:#A57712 ;
+    }
+    .brightGold {
+      color: #F2B632
+    }
+    .lightPurple {
+      color: #8834A5 ;
+    }
+    .bigO {
+      height: 475px;
+    }
+    .remark-code{
+        font-size: 20px;
+    }
+    </style>
+<!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
+  </head>
+  <body>
+    <!--#A57712  Dark Gold-->
+    <!--#E1F4EC  White Gold -->
+    <!--#F2B632  Bright Gold -->
+    <!--#27182C  Dark Purple -->
+    <!--#8834A5  Light Purple -->
+    <!--#D69ECA  White Purple -->
+    <textarea id="source">
+
+
+class: center, middle
+# .center[Networking]
+
+---
+
+# TODO
++ Programming Pattern
++ Networking
++ Interview Exercise
+
+---
+
+# Observer Pattern
+>The observer pattern is a software design pattern in which an object, called the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.
+It is mainly used to implement distributed event handling systems, in "event driven" software. Most modern languages such as Java and C# have built in "event" constructs which implement the observer pattern components, for easy programming and short code.
+The observer pattern is also a key part in the familiar model–view–controller (MVC) architectural pattern
+
+---
+
+# Observer Pattern Uses
+https://en.wikipedia.org/wiki/Observer_pattern
+- A one-to-many dependency between objects should be defined without making the objects tightly coupled.
+- It should be ensured that when one object changes state an open-ended number of dependent objects are updated automatically.
+- It should be possible that one object can notify an open-ended number of other objects.
+
+---
+
+# The OSI model
+https://en.wikipedia.org/wiki/OSI_model
+
+---
+
+# Layer 1 - Physical
+
+---
+
+# Layer 2 - Data
+---
+
+# Layer 3 - Network
+---
+
+# Layer 4 - Transport
+--- 
+
+# Layer 5 - Session
+---
+
+# Layer 6 - Presentation
+---
+
+# Layer 7 - Application
+---
+
+# Layer 8 - User 
+---
+
+# DNS
+---
+
+# Firewalls
+---
+
+# Load Balancers
+---
+
+# REST
+---
+
+# Sending Traffic Example
+---
+
+
+# Interview Questions
+What happens when you enter "google.com" in your web browser and hit enter
+https://github.com/alex/what-happens-when
+https://medium.com/@maneesha.wijesinghe1/what-happens-when-you-type-an-url-in-the-browser-and-press-enter-bb0aa2449c1a
+---
+
+
+
+</textarea>
+    <script src="/remark/remark-latest.min.js"></script>
+    <script src="/remark/jquery-2.2.4.min.js"></script>
+    <script src="/remark/highlight.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'default',
+        ratio: '16:9',
+        highlightLines: true
+      });
+      var hljs = hljs1.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
