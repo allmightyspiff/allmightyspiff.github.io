@@ -100,31 +100,168 @@ https://en.wikipedia.org/wiki/Observer_pattern
 
 ---
 
+# Network Topology Types
+https://en.wikipedia.org/wiki/Network_topology
+---
+
 # The OSI model
 https://en.wikipedia.org/wiki/OSI_model
 
 ---
 
 # Layer 1 - Physical
+https://en.wikipedia.org/wiki/Physical_layer
+- Coaxial
+- Twisted Copper (Cat5/6 Phone)
+- Fiber Optics
+- Avian Carrier
+- Microwave
+- Radio
 
 ---
 
 # Layer 2 - Data
+.columnA[
+- Packet sent to MAC address that are on the same LAN, or adjacent WAN nodes
+- VLANs
+- QoS
+- Switching
+- Error Recovery
+]
+.columnB[
+<img width=600px src='/CS/Day9/ethernetFrame.gif'>
+]
+
+???
+# Preamble
+The preamble is simply used for packet synchronising and to account for any 'background noise' at the header of the packet.
+# MAC addresses
+As discussed in the bridges section, a MAC (Media Access Control) address is a unique 'physical' hardware address. A MAC address is 48 bits in length (6 octets), and is typically written as 12 pairs of hexademical characters (since a pair of hexademical characters can be used to represent 8 bits, or one octet). For example:
+
+The first 3 octets indicate the 'manufacturer code', while the remaining 3 octets are assigned by the network component's manufacturer in order to be unique.
+
+#Ethertype
+This is simply a code indicating what sort of data is held in the frame. For an IP datagram, the Ethertype field would contain the hexadecimal value 0800H. However, many other Ethertypes are possible, such as 8137H for an IPX datagram, 0805H for an X.25 datagram, and 80D5H for an IBM SNA datagram. (Remember that 4 hex digits can be used to represent 16 bits. If this is confusing for you, review the Hexadecimal page.)
+
+# Data
+The data field must contain between 46 and 1500 octets, including IP and and TCP/UDP header information. If the data packaged into the datagram contains less than 46 octets, then the remaining bits are padded as zeros.
+
+# CRC
+The cyclic redundancy check is used to check that the data has not been modified/corrupted in transit. This figure is calculated based on the content of the frame at the time of sending. End-stations and gateways will also calculate the CRC value and compare it to the CRC at the end of the frame. If the values differ, then the frame is discarded and a new frame will have to be sent.
 ---
 
 # Layer 3 - Network
+https://tools.ietf.org/html/rfc1122
+https://en.wikipedia.org/wiki/Network_layer
+https://en.wikipedia.org/wiki/IPv4#Packet_structure
+- IP addresses (IPv4 and IPv6 )
+- Gateways
+- Routes
+- Packets
+- Internet Control MEssage Protocol (ICMP)
+---
+
+# IP Networking
+```bash
+$ netstat -nr
+Routing tables
+
+Internet:
+Destination        Gateway            Flags        Refs      Use   Netif
+default            172.30.198.1       UGSc           60        0     en3
+127.0.0.1          127.0.0.1          UH              3  2766343     lo0
+172.30.198.1       0:0:c:7:ac:a       UHLWIir        61        0     en3
+172.30.198.155     c0:56:27:f2:92:4f  UHLWI           0        0     en3
+255.255.255.255/32 link4              UCS             0        0     en3
+
+Internet6:
+Destination                             Gateway                         Flags         Netif
+default                                 fe80::%utun0                    UGcI          utun0
+::1                                     ::1                             UHL             lo0
+fe80::a1:f87b:64c3:a738%en3             38:c9:86:49:a:84                UHLWI           en3
+fe80::221:5aff:fe8c:359c%en3            0:21:5a:8c:35:9c                UHLWI           en3
+```
+---
+
+# IP Networking
+```bash
+$ traceroute github.com
+traceroute to github.com (192.30.253.113), 64 hops max, 52 byte packets
+ 1  10.36.0.2 (10.36.0.2)  3.217 ms  0.868 ms  1.851 ms
+ 2  10.255.36.1 (10.255.36.1)  2.817 ms  1.392 ms  2.152 ms
+ 3  10.34.255.22 (10.34.255.22)  0.761 ms  0.737 ms  0.739 ms
+ 4  10.34.255.25 (10.34.255.25)  2.766 ms  1.801 ms  2.277 ms
+ 5  192.168.31.110 (192.168.31.110)  14.823 ms  1.432 ms  0.817 ms
+ 6  slr01.hou02.softlayer.com (173.193.118.49)  1.819 ms  1.684 ms  1.588 ms
+ 7  ae4.dar02.sr02.hou02.networklayer.com (173.193.118.136)  1.525 ms  1.522 ms  1.576 ms
+ 8  ae9.bbr01.sr02.hou02.networklayer.com (50.97.18.242)  1.831 ms  1.713 ms  1.720 ms
+ 9  ae5.cbs01.sr02.hou02.networklayer.com (169.45.18.134)  2.601 ms  2.398 ms  4.185 ms
+10  ae2.cbs01.eq01.dal03.networklayer.com (169.45.19.149)  13.886 ms 
+11  ae7.cbs02.eq01.dal03.networklayer.com (50.97.17.51)  10.747 ms  8.476 ms  10.392 ms
+12  ae0.cbs01.tl01.atl01.networklayer.com (50.97.17.163)  31.096 ms  30.932 ms *
+13  ae0.cbs01.eq01.wdc02.networklayer.com (50.97.17.164)  36.569 ms *  41.450 ms
+14  ae29.bbr01.eq01.wdc02.networklayer.com (50.97.17.145)  38.233 ms  42.280 ms  40.881 ms
+15  eqix-ix-dc2.github.com (206.126.237.205)  52.372 ms  39.158 ms
+    eqix-ix-dc2.github.com (206.126.237.27)  43.267 ms
+16  *
+17  *
+18  lb-192-30-253-113-iad.github.com (192.30.253.113)  41.104 ms  39.176 ms  37.845 ms
+```
+---
+
+# IP addresses
+https://en.wikipedia.org/wiki/IPv4#Packet_structure
+- IPv4 uses 32-bit addresses which limits the address space to 4294967296 (232) addresses.
+- IPv4 reserves special address blocks for private networks (~18 million addresses) and multicast addresses (~270 million addresses).
+- ARIN
+- NetMask - https://en.wikipedia.org/wiki/Subnetwork
+- https://docs.python.org/3/library/ipaddress.html
+
+<img src='/CS/Day9/ipAddress.png'>
 ---
 
 # Layer 4 - Transport
---- 
+https://en.wikipedia.org/wiki/Transport_layer
+Kernel Level
+- Transmission Control Protocol (TCP)
+    + Handshakle: SYN ->,   <- SYN-ACK, ACK ->
+    + Congestion Control
+    + Error Detection
+    + Ordered Data Transfer
+    + Stateful
+- User Datagram Protocol (UDP)
+    + UDP uses a simple connectionless communication model with a minimum of protocol mechanism
+    + Streaming data
+    + Checksums, but no guarantee of delivery
+---
 
 # Layer 5 - Session
+https://en.wikipedia.org/wiki/Session_layer
+OS Level
+- Ports
+- State
+    + LISTEN
+    + ESTABLISHED
+    + CLOSING
+    + TIME-WAIT
+  
 ---
 
 # Layer 6 - Presentation
+https://en.wikipedia.org/wiki/Presentation_layer
+OS Level
+- Encryption
+- Data serialization
+- Compression / Decompression
 ---
 
 # Layer 7 - Application
+https://en.wikipedia.org/wiki/Application_layer
+- Useable Data
+- HTTP
+- FTP
+- DNS
+- SMTP
 ---
 
 # Layer 8 - User 
@@ -139,10 +276,33 @@ https://en.wikipedia.org/wiki/OSI_model
 # Load Balancers
 ---
 
-# REST
+# REST / HTTP
 ---
 
 # Sending Traffic Example
+```bash
+nc -l 1234
+```
+```bash
+nc localhost 1234
+Hello
+```
+```bash
+sudo tcpdump --dont-verify-checksums -i lo0 -nnvXSs 0   port 12345
+tcpdump: listening on lo0, link-type NULL (BSD loopback), capture size 262144 bytes
+17:52:08.237296 IP (tos 0x2,ECT(0), ttl 64, id 12889, offset 0, flags [DF], proto TCP (6), length 58)
+    127.0.0.1.64643 > 127.0.0.1.12345: Flags [P.], seq 1673768482:1673768488, ack 3025462230, win 12759, options [nop,nop,TS val 2483737087 ecr 2483671261], length 6
+    0x0000:  4502 003a 3259 4000 4006 0000 7f00 0001  E..:2Y@.@.......
+    0x0010:  7f00 0001 fc83 3039 63c3 ae22 b454 e3d6  ......09c.."".T..
+    0x0020:  8018 31d7 fe2e 0000 0101 080a 940a d1ff  ..1.............
+    0x0030:  9409 d0dd 4865 6c6c 6f0a                 ....Hello.
+```
+---
+
+# DDOS
+---
+
+# Net Nuetrality
 ---
 
 
