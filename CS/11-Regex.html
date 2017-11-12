@@ -212,6 +212,8 @@ http://fsme.sourceforge.net/
 'Finite State Machine' + 'Finite Automata'  + define('POSIX Standard',define('RegEx'))
 ```
 https://en.wikibooks.org/wiki/Regular_Expressions/POSIX-Extended_Regular_Expressions
+https://www.regular-expressions.info/posixbrackets.html
+
 |symbol | Description |
 | --- | --- |
 | `()` | Sub-Expression |
@@ -222,8 +224,28 @@ https://en.wikibooks.org/wiki/Regular_Expressions/POSIX-Extended_Regular_Express
 | PIPE| Matches the preceding OR following element|
 | `^` | string START marker|
 | `$` | string END marker|
+| `[:alphanum]` | ` [a-zA-Z0-9]` | 
+| `[:ascii:]` | `[\x00-\x7F]` | 
+| `[:blank:]` | spaces and tabs
+| `[:cntrl:]` | control characters (like ^H for example)
 
 ---
+
+# Regular Expression
+```python
+'Finite State Machine' + 'Finite Automata'  + 'POSIX Standard' + define('RegEx')
+```
+
+- "[hc]+at" matches with "hat", "cat", "hhat", "chat", "hcat", "ccchat" etc.
+- "[hc]?at" matches "hat", "cat" and "at"
+- "([cC]at)|([dD]og)" matches "cat", "Cat", "dog" and "Dog"
+---
+# Fun with regex
+---
+
+# Regex in python
+---
+
 </textarea>
     <script src="/remark/remark-latest.min.js"></script>
     <script src="/remark/jquery-2.2.4.min.js"></script>
