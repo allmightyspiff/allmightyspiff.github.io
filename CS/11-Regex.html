@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Day 11 - RegEx</title>
+    <meta charset="utf-8">
+    <style>
+      body { 
+        font-family: monospace; 
+        font-size: 2em;
+      }
+      h1 {
+        font-family: monospace;
+        color: #F2B632;
+      } 
+      h2 {
+        font-family: monospace;
+        color: #8834A5;
+      }
+      h3 {
+        color: #A57712;
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Courier New'; }
+      .remark-slide-content {
+        background-color: #252839;
+        color: #E1F4EC;
+        font-size: 25px;
+        padding: 0em 1em 1em 1em;
+      }
+    img {background-color: #E1F4EC ;}
+    .columnA {float:left; width: 49%;}
+    .columnB {float:right; width: 49%; }
+    .columnD {float:right; width: 40%; }
+    .columnC {float:right; width: 60%; }
+    a {color:#A57712; }
+    hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
+    li {margin-bottom: .5em; margin-top: .5em;}
+    blockquote { 
+        color: #F2B632;
+        font-family: Palatino;
+        font-weight: normal;
+        font-size: 35px;
+     }
+     .MathJax {
+     font-size: 8em !important;
+     color: #D69ECA !important;
+    }
+    th {
+      color:#A57712 ;
+    }
+    .brightGold {
+      color: #F2B632
+    }
+    .lightPurple {
+      color: #8834A5 ;
+    }
+    .darkPurle {
+        .color: #27182C;
+    }
+    .bigO {
+      height: 475px;
+    }
+    .remark-code{
+        font-size: 20px;
+    }
+    </style>
+<!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
+  </head>
+  <body>
+    <!--#A57712  Dark Gold-->
+    <!--#E1F4EC  White Gold -->
+    <!--#F2B632  Bright Gold -->
+    <!--#27182C  Dark Purple -->
+    <!--#8834A5  Light Purple -->
+    <!--#D69ECA  White Purple -->
+    <textarea id="source">
+
+
+class: center, middle
+# .center[RegEx]
+
+---
+
+# Singleton Pattern
+https://en.wikipedia.org/wiki/Singleton_pattern
+https://blogs.msdn.microsoft.com/scottdensmore/2004/05/25/why-singletons-are-evil/
+## Problems it solves
+- How can it be ensured that a class has only one instance?
+- How can the sole instance of a class be accessed easily?
+- How can a class control its instantiation?
+- How can the number of instances of a class be restricted?
+
+---
+
+# Singleton Pattern
+## Actual Uses
+- Controlling writing to a file
+- DB access
+- Interacting with external data sources
+http://python-3-patterns-idioms-test.readthedocs.io/en/latest/Singleton.html
+
+---
+
+# Singleton Python
+
+.columnC[
+```python
+class OnlyOne:
+    class __OnlyOne:
+        def __init__(self, arg):
+            self.val = arg
+        def __str__(self):
+            return repr(self) + self.val
+    instance = None
+    def __init__(self, arg):
+        if not OnlyOne.instance:
+            OnlyOne.instance = OnlyOne.__OnlyOne(arg)
+        else:
+            OnlyOne.instance.val = arg
+    def __getattr__(self, name):
+        return getattr(self.instance, name)
+
+```
+]
+.columnD[
+```bash
+x = OnlyOne('sausage')
+print(x)
+y = OnlyOne('eggs')
+print(y)
+z = OnlyOne('spam')
+print(z)
+<__main__.__OnlyOne at 0076B7AC>sausage
+<__main__.__OnlyOne at 0076B7AC>eggs
+<__main__.__OnlyOne at 0076B7AC>spam
+```
+]
+---
+
+# Recursion
+```python
+define('recursion')
+```
+><span class='lightPurple'>Recursion</span>: A method that calls itself. See <span class='lightPurple'>`recursion`</span>
+
+```python
+define('recursion',define('recursion'))
+```
+><span class='lightPurple'>Recursion</span>: A method that calls itself. See <span class='lightPurple'>`recursion`</span>
+
+```python
+define('recursion',define('recursion',define('recursion')))
+```
+><span class='lightPurple'>Recursion</span>: A method that calls itself. See <span class='lightPurple'>`recursion`</span>
+---
+
+# RegEx
+```python
+define('RegEx')
+```
+><span class='lightPurple'>RegEx</span>: RegEx, or a Regular Expression, is a form of <span class='lightPurple'>`finite automata`</span> that is useful in searching for patterns in text data. Regular Expression syntax has been standardized in the <span class='lightPurple'>`POSIX Standard`</span>
+---
+
+# Finite Automata
+```python
+define('Finite Automata', define('RegEx'))
+```
+https://en.wikipedia.org/wiki/Deterministic_finite_automaton
+><span class='lightPurple'>Finite Automata</span>: a <span class='lightPurple'>`finite-state machine`</span> that accepts and rejects strings of symbols and only produces a unique computation (or run) of the automaton for each input string.
+---
+
+# Finite State Machine
+```python
+define('Finite State Machine', define('Finite Automata', define('RegEx')))
+```
+https://en.wikipedia.org/wiki/Finite-state_machine
+><span class='lightPurple'>Finite State Machine</span>: An abstract machine that can be in exactly one of a finite number of states at any given time. The FSM can change from one state to another in response to some external inputs. An FSM is defined by a list of its states, its initial state, and the conditions for each transition.
+
+>Examples are vending machines, which dispense products when the proper combination of coins is deposited, elevators, whose sequence of stops is determined by the floors requested by riders, traffic lights, which change sequence when cars are waiting, and combination locks, which require the input of combination numbers in the proper order.
+
+---
+
+# Finite State Machines
+https://wiki.python.org/moin/FiniteStateMachine
+
+https://youtu.be/vhiiia1_hC4
+.columnA[
+<img width=500px src='/CS/Day11/state-machine-nice.png'>
+]
+.columnB[
+<img width=500px src='/CS/Day11/fsm_lock.png'>
+]
+
+http://fsme.sourceforge.net/
+---
+
+# Finite Automata 
+```python
+'Finite State Machine' + define('Finite Automata', define('RegEx')))
+```
+- Deterministic (DFA)
+    + every state has exactly one transition for each possible input
+- NON-Deterministic (NDFA)
+    +  an input can lead to one, more than one, or no transition for a given state
+    + NFDA can be converted to DFA. Via the <span class='lightPurple'>`Powerset Constructor`</span>
+    + https://en.wikipedia.org/wiki/Powerset_construction
+<img src='/CS/Day11/regex-fms.png'>
+---
+
+# POSIX Standard
+```python
+'Finite State Machine' + 'Finite Automata'  + define('POSIX Standard',define('RegEx'))
+```
+https://en.wikibooks.org/wiki/Regular_Expressions/POSIX-Extended_Regular_Expressions
+|symbol | Description |
+| --- | --- |
+| `()` | Sub-Expression |
+| `[]` | Character set. Matches one character in the set|
+| `.` | Matches the preceding element exactly one time|
+| `*` | Matches the preceding element zero or more times|
+| `?` | Matches the precending element zero or one times |
+| PIPE| Matches the preceding OR following element|
+| `^` | string START marker|
+| `$` | string END marker|
+
+---
+</textarea>
+    <script src="/remark/remark-latest.min.js"></script>
+    <script src="/remark/jquery-2.2.4.min.js"></script>
+    <script src="/remark/highlight.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'default',
+        ratio: '16:9',
+        highlightLines: true
+      });
+      var hljs = hljs1.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
