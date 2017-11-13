@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Day 10 - Cryptography</title>
+    <meta charset="utf-8">
+    <style>
+      body { 
+        font-family: monospace; 
+        font-size: 2em;
+      }
+      h1 {
+        font-family: monospace;
+        color: #F2B632;
+      } 
+      h2 {
+        font-family: monospace;
+        color: #8834A5;
+      }
+      h3 {
+        color: #A57712;
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Courier New'; }
+      .remark-slide-content {
+        background-color: #252839;
+        color: #E1F4EC;
+        font-size: 25px;
+        padding: 0em 1em 1em 1em;
+      }
+    img {background-color: #E1F4EC ;}
+    .columnA {float:left; width: 49%;}
+    .columnB {float:right; width: 49%; }
+    .columnD {float:right; width: 40%; }
+    .columnC {float:right; width: 60%; }
+    a {color:#A57712; }
+    hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
+    li {margin-bottom: .5em; margin-top: .5em;}
+    blockquote { 
+        color: #F2B632;
+        font-family: Palatino;
+        font-weight: normal;
+        font-size: 35px;
+     }
+     .MathJax {
+     font-size: 8em !important;
+     color: #D69ECA !important;
+    }
+    th {
+      color:#A57712 ;
+    }
+    .brightGold {
+      color: #F2B632
+    }
+    .lightPurple {
+      color: #8834A5 ;
+    }
+    .bigO {
+      height: 475px;
+    }
+    .remark-code{
+        font-size: 20px;
+    }
+    </style>
+<!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
+  </head>
+  <body>
+    <!--#A57712  Dark Gold-->
+    <!--#E1F4EC  White Gold -->
+    <!--#F2B632  Bright Gold -->
+    <!--#27182C  Dark Purple -->
+    <!--#8834A5  Light Purple -->
+    <!--#D69ECA  White Purple -->
+    <textarea id="source">
+
+
+class: center, middle
+# .center[Security and Cryptography]
+
+---
+
+# Decorator Pattern
+https://www.amazon.com/gp/product/0201633612/ref=ase_bruceeckelA/
+https://en.wikipedia.org/wiki/Decorator_pattern
+https://www.python.org/dev/peps/pep-0318/
+```python
+@dec2
+@dec1
+def func(arg1, arg2, ...):
+    pass
+```
+
+```python
+def func(arg1, arg2, ...):
+    pass
+func = dec2(dec1(func))
+```
+>Indeed, you can use Python decorators to implement the Decorator pattern, but that’s an extremely limited use of it. Python decorators, I think, are best equated to macros.
+---
+# Docroators
+https://wiki.python.org/moin/DecoratorPattern
+.columnA[
+```python
+# PythonDecorators/entry_exit_class.py
+class entry_exit(object):
+
+    def __init__(self, f):
+        self.f = f
+
+    def __call__(self):
+        print("Entering", self.f.__name__)
+        self.f()
+        print("Exited", self.f.__name__)
+
+@entry_exit
+def func1():
+    print("inside func1()")
+
+@entry_exit
+def func2():
+    print("inside func2()")
+
+func1()
+func2()
+```
+]
+.columnB[
+```bash
+Entering func1
+inside func1()
+Exited func1
+Entering func2
+inside func2()
+Exited func2
+```
+]
+
+---
+
+# Encryption
+- Message
+- Ciphers
+- Public Keys
+- Private Keys
+---
+
+# Substitution Cipher
+https://en.wikipedia.org/wiki/Substitution_cipher
+
+<img src='/CS/Day10/300px-ROT13.png'>
+
+---
+
+# Public Key Cryptography
+How the math works
+
+---
+
+# Private Key Cryptography
+---
+
+# Random Numbers
+
+---
+
+# Secure Programming
+---
+
+# Application Permissions
+---
+
+# Interview Exercises
+---
+
+
+</textarea>
+    <script src="/remark/remark-latest.min.js"></script>
+    <script src="/remark/jquery-2.2.4.min.js"></script>
+    <script src="/remark/highlight.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'default',
+        ratio: '16:9',
+        highlightLines: true
+      });
+      var hljs = hljs1.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
