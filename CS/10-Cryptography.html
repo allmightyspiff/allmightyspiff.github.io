@@ -152,10 +152,8 @@ https://en.wikipedia.org/wiki/Substitution_cipher
 
 - Group into static sized blocks to avoid word detection
 - Shuffle alphabet
-- Ceasar Cipher
-
 - Key: Alphabet
-- Cipher: ROT13
+- Cipher: CeasarCipher(Rot13) 
 - Message: "HELLO"
 ---
 
@@ -167,14 +165,47 @@ https://en.wikipedia.org/wiki/Substitution_cipher
 <img height=300px src='/CS/Day10/aes-chart.png'>
 ---
 
-# Public Key Cryptography
-How the math works
+# Public Key Cryptography - Asymetric Keys
+https://en.wikipedia.org/wiki/Public-key_cryptography
+- Prime generation is easy: It’s easy to find a random prime number of a given size. 
+- Multiplication is easy: Given p and q, it’s easy to find n = pq. 
+- Factoring is hard: Given n, it appears to be quite hard to recover the prime factors p and q. 
+- Modular exponentiation is easy: Given n, m, and e, it’s easy to compute c = me % n. 
+- Modular root extraction is otherwise hard: Given only n, e, and c, but not the prime factors, it appears to be quite hard to recover the value m
+
 
 ---
 
+# Math Behind Public Keys
+https://nrich.maths.org/2200
+1. Find 2 prime numbers, `p` and `q`
+2. `n = p * q`
+3. `m = lcm {p−1, q−1}`
+4. Bob chooses r, where r>1 and r is coprime with m (i.e. r and m have no factors in common);
+5. Bob then finds the unique s such that rs≡1(modm)
+6. Bob now tells everyone what n and r are, but does NOT say what p, q or s are.
+7. Alice wants to send the message M (a single number) where M and n are coprime and 0 < M < n
+8. Alice finds Mc, where Mc≡Mr(modn), and sends the message Mc to Bob.
+---
+
+# Public Key Uses
+- SSL/TLS
+- Signatures
+- Exchanging Symetric Keys (SSH)
+---
 
 
 # Random Numbers
+### Seeds
+### Linux
+Uses secure hashes into an entropy pool.
+- /dev/urandom: non-blocking, but less random
+- /dev/random: blocks to wait for entopy pool to refill. Use this for crypto needs
+
+### Mac and BSD
+https://en.wikipedia.org/wiki/Yarrow_algorithm - SHA1 hash + triple key DES
+
+urandom and random behave the same
 
 ---
 
