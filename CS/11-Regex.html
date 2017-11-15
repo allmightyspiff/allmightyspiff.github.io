@@ -239,13 +239,67 @@ https://www.regular-expressions.info/posixbrackets.html
 - "[hc]+at" matches with "hat", "cat", "hhat", "chat", "hcat", "ccchat" etc.
 - "[hc]?at" matches "hat", "cat" and "at"
 - "([cC]at)|([dD]og)" matches "cat", "Cat", "dog" and "Dog"
+<img src='/CS/Day11/regex-fsm02.png'>
 ---
-# Fun with regex
+
+# Fun with regex - Email
+>is `user_email` a valid email address????
+
+???
+https://regex101.com/r/zaGejC/2/
+https://tools.ietf.org/html/rfc2822
+https://tools.ietf.org/html/rfc5322#section-3.4
+https://tools.ietf.org/html/rfc3696
+https://en.wikipedia.org/wiki/Email_address
+
+---
+
+# Fun with regex - Email Continued
+http://www.ex-parrot.com/~pdw/Mail-RFC822-Address.html
+---
+
+# Fun with regex - Username
+> Does `username` have 3-21 characeters, only alphabet and `_`
+---
+
+# Fun with regex - IP address
+> IS `ip` a valid ip address?
+
+
+???
+## IP
+
+'/^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$/'
+
+https://stackoverflow.com/questions/319279/how-to-validate-ip-address-in-python
+https://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149
+---
+
+# Fun with Regex - Url rewriting
+```
+RewriteEngine On
+# This will enable the Rewrite capabilities
+
+RewriteCond %{HTTPS} !=on
+# This checks to make sure the connection is not already HTTPS
+
+RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+```
+---
+
+# Fin with Regex - HTML matching
+https://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149
+<img src='/CS/Day11/htmltag.jpg'>
 ---
 
 # Regex in python
+https://docs.python.org/3/library/re.html
 ---
 
+# Regex in python - CC
+> Does `input` contain a Credit Card number?
+
+---
 </textarea>
     <script src="/remark/remark-latest.min.js"></script>
     <script src="/remark/jquery-2.2.4.min.js"></script>
