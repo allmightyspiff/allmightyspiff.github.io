@@ -292,7 +292,35 @@ https://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6
 <img src='/CS/Day11/htmltag.jpg'>
 ---
 
+# GREP
+```text
+$> grep [OPTIONS] PATTERN [FILE...]
+  -E, --extended-regexp
+Interpret PATTERN as an extended regular expression
+  -i, --ignore-case
+Ignore case distinctions in both the PATTERN and the input files.
+  -v, --invert-match
+Invert the sense of matching, to select non-matching lines.
+  -c, --count
+Suppress normal output; instead print a count of matching lines for each input file.
+  -C NUM, -NUM, --context=NUM
+Print NUM lines of output context. Places a line containing a group separator (--) between contiguous groups of matches.
+```
+```bash
+$ grep -E "401 [[:digit:]]+$" http.log
+64.242.88.10 - - [07/Mar/2004:16:05:49 -0800] "GET /twiki/bin/edit/Main/Double_bounce_sender?topicparent=Main.ConfigurationVariables HTTP/1.1" 401 12846
+64.242.88.10 - - [07/Mar/2004:16:29:16 -0800] "GET /twiki/bin/edit/Main/Header_checks?topicparent=Main.ConfigurationVariables HTTP/1.1" 401 12851
+```
+```bash
+$ grep -E "401 [[:digit:]]+$" http.log  | awk '{print $7}'
+/twiki/bin/edit/Main/Double_bounce_sender?topicparent=Main.ConfigurationVariables
+/twiki/bin/edit/Main/Header_checks?topicparent=Main.ConfigurationVariables
+
+```
+---
+
 # Regex in python
+https://wiki.python.org/moin/RegularExpression
 https://docs.python.org/3/library/re.html
 ---
 
