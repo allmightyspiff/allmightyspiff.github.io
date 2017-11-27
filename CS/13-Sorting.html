@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Day 12 - Graphs</title>
+    <meta charset="utf-8">
+    <style>
+      body { 
+        font-family: monospace; 
+        font-size: 2em;
+      }
+      h1 {
+        font-family: monospace;
+        color: #F2B632;
+      } 
+      h2 {
+        font-family: monospace;
+        color: #8834A5;
+      }
+      h3 {
+        color: #A57712;
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Courier New'; }
+      .remark-slide-content {
+        background-color: #252839;
+        color: #E1F4EC;
+        font-size: 25px;
+        padding: 0em 1em 1em 1em;
+      }
+    img {background-color: #E1F4EC ;}
+    .columnA {float:left; width: 49%;}
+    .columnB {float:right; width: 49%; }
+    .columnD {float:right; width: 39%; }
+    .columnC {float:left; width: 60%; }
+    a {color:#A57712; }
+    hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
+    li {margin-bottom: .5em; margin-top: .5em;}
+    blockquote { 
+        color: #F2B632;
+        font-family: Palatino;
+        font-weight: normal;
+        font-size: 35px;
+     }
+     .MathJax {
+     font-size: 8em !important;
+     color: #D69ECA !important;
+    }
+    th {
+      color:#A57712 ;
+    }
+    .brightGold {
+      color: #F2B632
+    }
+    .lightPurple {
+      color: #8834A5 ;
+    }
+    .darkPurle {
+        .color: #27182C;
+    }
+    .bigO {
+      height: 475px;
+    }
+    .remark-code{
+        font-size: 20px;
+    }
+    </style>
+<!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
+  </head>
+  <body>
+    <!--#A57712  Dark Gold-->
+    <!--#E1F4EC  White Gold -->
+    <!--#F2B632  Bright Gold -->
+    <!--#27182C  Dark Purple -->
+    <!--#8834A5  Light Purple -->
+    <!--#D69ECA  White Purple -->
+    <textarea id="source">
+
+
+class: center, middle
+# .center[Sorting]
+
+---
+
+# Test Driven Development
+https://en.wikipedia.org/wiki/Test-driven_development
+
+1. Create your test
+2. Write code until all tests pass
+3. Repeat
+
+---
+
+# Why?
+
+- Gives you an idea of how your code will be used
+- Gives you an idea of some of the edge cases to look out for
+- You don't forget to write the unit tests
+- Gives you a sense of progress as more unit tests start to pass
+---
+
+# Unit Testing in Python
+https://docs.python.org/3/library/unittest.html
+
+```python
+import unittest
+class TestWhatever(unittest.TestCase):
+  def setUp(self):
+    self.thing = 1
+  def test_first_thing(self):
+    self.assertEqual(self.thing,1)
+  def tearDown(self):
+    self.thing = None
+
+if __name__ == '__main__':
+    unittest.main()
+```
+---
+
+# Mock objects
+https://docs.python.org/3/library/unittest.mock.html
+
+- patch(): makes can calls to the patched class or object use the mock object instead of a real one
+- side_effect: forces the mocked method to return specific values
+- assert_called_with: checks to see if the mock object was called with specific parameters
+
+---
+
+# Test first, program later
+Write a program that returns the size of a web page
+.columnA[
+```python
+import unittest
+
+class TestWebSize(unittest.TestCase):
+
+  def setUp(self):
+    self.url = "https://google.com"
+    self.urlParser = urlParser()
+
+  def test_first_thing(self):
+    result = self.urlParser.getSize(self.url)
+    self.assertEqual(result,1)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+]
+.columnB[
+```
+E
+=============================================
+ERROR: test_first_thing (__main__.TestWebSize)
+----------------------------------------------
+Traceback (most recent call last):
+  File "\webSize.py", line 8, in setUp
+    self.urlParser = urlParser()
+NameError: name 'urlParser' is not defined
+
+----------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (errors=1)
+[Finished in 0.5s with exit code 1]
+```
+]
+---
+
+# urlParser
+.columnA[
+```python
+import requests
+class urlParser():
+    def getSize(self, url):
+        result = requests.get(url)
+        return len(result.content)
+
+import unittest
+class TestWebSize(unittest.TestCase):
+
+  def setUp(self):
+    self.url = "https://github.com"
+    self.urlParser = urlParser()
+
+  def test_first_thing(self):
+    result = self.urlParser.getSize(self.url)
+    self.assertEqual(result,1)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+]
+.columnB[
+```
+F
+============================================
+FAIL: test_first_thing (__main__.TestWebSize)
+--------------------------------------------
+Traceback (most recent call last):
+  File "\webSize.py", line 20, in test_first_thing
+    self.assertEqual(result,1)
+AssertionError: 51377 != 1
+
+--------------------------------------------
+```
+]
+---
+
+# Jobs Done
+.columnC[
+```python
+import requests
+class urlParser():
+    def getSize(self, url):
+        result = requests.get(url)
+        return len(result.content)
+
+class fakeRequest():
+    def __init__(self):
+        self.content = "HELLO"
+
+import unittest
+from unittest import mock
+class TestWebSize(unittest.TestCase):
+    @mock.patch('requests.get')
+    def test_first_thing(self, _fake_request):
+        _fake_request.return_value = fakeRequest() 
+        result = self.urlParser.getSize(self.url)
+        self.assertEqual(result,5)
+        self.assertEqual(1, _fake_request.call_count)
+        _fake_request.assert_called_once_with(self.url)
+```
+]
+
+.columnD[
+```
+. 
+"--------------------"
+Ran 1 test in 0.000s
+
+OK
+[Finished in 0.3s]
+```
+]
+
+---
+# Heap Sort
+---
+# Quick Sort
+--- 
+
+</textarea>
+    <script src="/remark/remark-latest.min.js"></script>
+    <script src="/remark/jquery-2.2.4.min.js"></script>
+    <script src="/remark/highlight.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'default',
+        ratio: '16:9',
+        highlightLines: true
+      });
+      var hljs = hljs1.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
