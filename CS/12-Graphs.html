@@ -239,8 +239,80 @@ http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-alg
 <img src='/CS/Day12/Fig-11.jpg'>
 ---
 
+# Shortest Path with a graph DB
+```
+docker run --publish=7474:7474  --publish=7687:7687 \
+    --volume=/CS/Day12/docker-neo4j/data:/data neo4j:3.0
+```
+
+
+```
+create (a:Node { id: 0 })
+create (b:Node { id: 1 })
+create (c:Node { id: 2 })
+(...)
+
+MATCH (a:Node),(b:Node) WHERE a.id = 0 AND b.id = 1 CREATE (a)-[r:PATH { weight:4 }]->(b)
+MATCH (a:Node),(b:Node) WHERE a.id = 0 AND b.id = 7 CREATE (a)-[r:PATH { weight:8 }]->(b)
+MATCH (a:Node),(b:Node) WHERE a.id = 1 AND b.id = 2 CREATE (a)-[r:PATH { weight:8 }]->(b)
+(...)
+
+CREATE INDEX ON :Node(id)
+
+MATCH (start:Node { id: 0}),(end:Node), p = shortestPath((start)-[:PATH*]-(end))
+WHERE end.id > 0
+RETURN end.id, reduce(weight=0, r in relationships(p)| weight+r.weight) AS totalWeight
+```
+
+
+???
+```
+create (a:Node { id: 0 })
+create (b:Node { id: 1 })
+create (c:Node { id: 2 })
+create (d:Node { id: 3 })
+create (e:Node { id: 4 })
+create (f:Node { id: 5 })
+create (g:Node { id: 6 })
+create (h:Node { id: 7 })
+create (i:Node { id: 8 })
+
+MATCH (a:Node),(b:Node) WHERE a.id = 0 AND b.id = 1 CREATE (a)-[r:PATH { weight:4 }]->(b)
+MATCH (a:Node),(b:Node) WHERE a.id = 0 AND b.id = 7 CREATE (a)-[r:PATH { weight:8 }]->(b)
+
+MATCH (a:Node),(b:Node) WHERE a.id = 1 AND b.id = 2 CREATE (a)-[r:PATH { weight:8 }]->(b)
+MATCH (a:Node),(b:Node) WHERE a.id = 1 AND b.id = 7 CREATE (a)-[r:PATH { weight:11 }]->(b)
+
+MATCH (a:Node),(b:Node) WHERE a.id = 2 AND b.id = 3 CREATE (a)-[r:PATH { weight:7 }]->(b) 
+MATCH (a:Node),(b:Node) WHERE a.id = 2 AND b.id = 5 CREATE (a)-[r:PATH { weight:4 }]->(b) 
+MATCH (a:Node),(b:Node) WHERE a.id = 2 AND b.id = 8 CREATE (a)-[r:PATH { weight:2 }]->(b) 
+
+MATCH (a:Node),(b:Node) WHERE a.id = 3 AND b.id = 4 CREATE (a)-[r:PATH { weight:9 }]->(b) 
+MATCH (a:Node),(b:Node) WHERE a.id = 3 AND b.id = 5 CREATE (a)-[r:PATH { weight:14 }]->(b) 
+
+MATCH (a:Node),(b:Node) WHERE a.id = 4 AND b.id = 5 CREATE (a)-[r:PATH { weight:10 }]->(b) 
+
+MATCH (a:Node),(b:Node) WHERE a.id = 5 AND b.id = 6 CREATE (a)-[r:PATH { weight:2 }]->(b) 
+
+
+MATCH (a:Node),(b:Node) WHERE a.id = 6 AND b.id = 8 CREATE (a)-[r:PATH { weight:6 }]->(b) 
+MATCH (a:Node),(b:Node) WHERE a.id = 6 AND b.id = 7 CREATE (a)-[r:PATH { weight:1 }]->(b) 
+
+MATCH (a:Node),(b:Node) WHERE a.id = 7 AND b.id = 8 CREATE (a)-[r:PATH { weight:7 }]->(b) 
+
+CREATE INDEX ON :Node(id)
+
+MATCH (start:Node { id: 0}),(end:Node), p = shortestPath((start)-[:PATH*]-(end))
+WHERE end.id > 0
+RETURN end.id, reduce(weight=0, r in relationships(p)| weight+r.weight) AS totalWeight
+```
+
+---
+
 # Graph Cycle Interview Question
 http://www.geeksforgeeks.org/detect-cycle-in-a-graph/
+
+
 ---
 
 # Backtracking Interview Question
