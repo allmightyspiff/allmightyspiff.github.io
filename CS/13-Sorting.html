@@ -351,12 +351,56 @@ if __name__ == '__main__':
 ```
 ---
 
-# Heap Sort Code
+
+```python
+class heapSort():
+
+    def heapify(self, array, heap_size, top_index):
+        largest = top_index
+        left = (2 * top_index) + 1
+        right = (2 * top_index) + 2
+
+        if left < heap_size and array[largest] < array[left]:
+            largest = left
+        if right < heap_size and array[largest] < array[right]:
+            largest = right
+
+        if largest != top_index:
+            array[top_index], array[largest] = array[largest], array[top_index]
+            self.heapify(array, heap_size, largest)
+
+    def sort(self, array):
+        size = len(array)
+        # Build the max heap
+        for i in range(size, -1, -1):
+            self.heapify(array, size, i)
+        # Sorting
+        for i in range(size - 1, 0, -1):
+            # Swap top and last elements
+            array[i], array[0] = array[0], array[i]
+            self.heapify(array, i, 0)
+        return array
+```
 ---
 
 # Quick Sort
---- 
+Like Merge Sort, QuickSort is a Divide and Conquer algorithm. It picks an element as pivot and partitions the given array around the picked pivot. There are many different versions of quickSort that pick pivot in different ways.
 
+1. Always pick first element as pivot.
+2. Always pick last element as pivot (What we will do)
+3. Pick a random element as pivot.
+4. Pick median as pivot.
+
+Average O(nlogn), Worst O(n^2)
+
+https://www.youtube.com/watch?v=PgBzjlCcFvc
+---
+
+# Quick Sort Algorithm
+1. Picks a pivot element, usually you’ll select a random element as the pivot
+2. Then it partitions the array into three sections: all of the elements less than the pivot which are located left of the pivot, the pivot itself, and all of the elements greater than the pivot located to the right of the pivot
+3. Lastly it runs steps 1 and 2 on the left and right partitions recursively until the full partition is sorted
+---
 </textarea>
     <script src="/remark/remark-latest.min.js"></script>
     <script src="/remark/jquery-2.2.4.min.js"></script>
