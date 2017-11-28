@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Day 12 - Graphs</title>
+    <title>Day 13 - Sorting 2</title>
     <meta charset="utf-8">
     <style>
       body { 
@@ -72,6 +72,9 @@
     }
     .remark-code{
         font-size: 20px;
+    }
+    .good{
+        color: green;
     }
 
     </style>
@@ -400,6 +403,48 @@ https://www.youtube.com/watch?v=PgBzjlCcFvc
 1. Picks a pivot element, usually you’ll select a random element as the pivot
 2. Then it partitions the array into three sections: all of the elements less than the pivot which are located left of the pivot, the pivot itself, and all of the elements greater than the pivot located to the right of the pivot
 3. Lastly it runs steps 1 and 2 on the left and right partitions recursively until the full partition is sorted
+---
+
+```python
+class quickSort():
+    """
+    partitions array so that value in high is moved to a position where
+    all elements to the left are lower, and elements to the right are higher in value
+    """ 
+    def partition(self, array, low, high):
+        i = ( low - 1 )    # smallest element value
+        pivot = array[high]  # pivot value
+     
+        for x in range(low , high):
+            if array[x] <= pivot:
+                i = i + 1
+                array[i], array[x] = array[x], array[i] # swap lowest and x
+     
+        i = i + 1
+        array[i],array[high] = array[high],array[i] # Swap i and high
+        return ( i ) # return new pivot point
+
+    def sort(self, array, low = 0, high = None):
+        if high is None: # default partition is last element
+            high = len(array) - 1
+        if low < high: # Recurse until each partition meets in the middle
+            # partition elements, returns new index of partitioned value
+            pi = self.partition(array,low,high) 
+
+            self.sort(array, low, pi-1) # sort left side of partition
+            self.sort(array, pi+1, high)  # sort right side of partition
+```
+---
+
+# Sorting in Review
+| Name | Best Case | Average Case | Worst Case | Space | Method | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Quicksort | O(nLogn) | O(nLogn) | O(n^2) | O(n) | partitioning |  Good on real world data |
+| Merge Sort | O(nLogn) | O(nLogn) | O(nLogn) | O(n), O(1) for linked list | Merging | Highly Parallelisable | 
+| Heapsort | O(nLogn) | O(nLogn) | O(nLogn) | O(1) | Selection | In palce sort | 
+| Timsort | O(n) | O(nLogn) | O(nLogn) | O(logn) | Insert & Merge | Used in python libraries | 
+| Bubble Sort | O(n) | O(n^2) | O(n^2) | O(1) | Exchanging | Simple to implement | 
+| Insertion Sort | O(n) | O(n^2) | O(n^2) | O(1) | Insertion | Sorts one at a time | 
 ---
 </textarea>
     <script src="/remark/remark-latest.min.js"></script>
