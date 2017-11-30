@@ -93,22 +93,192 @@ class: center, middle
 ---
 
 # Database Basics
+- Need a place to store data when your program isn't running
+- Organize and control access to data on disk
+- Allow multiple programs to work on the same data
+- Dont have to write your own database
+
 ---
 
 # ORM
+https://www.sqlalchemy.org/
+
+https://www.fullstackpython.com/object-relational-mappers-orms.html
+
+https://www.pythoncentral.io/introductory-tutorial-python-sqlalchemy/
+
+https://pythonspot.com/en/orm-with-sqlalchemy/
+
+- Define your database in your application
+- Class for tables, member variables for columns
+- Takes care of a lot of the boring bits
+- Its OK to still manaully write SQL queries
 ---
 
 # Types of Databases
+.columnA[
+## SQL
+- SQLLite
+- ~~MYSQL~~ (MariaDB)
+- Postgresql
+- Oracle*
+- MSSQL
+- DB2*
+- SAP HANA*
+]
+.columnB[
+## Specialized DBs
+- Document: CouchDB
+- Key:Value: Riak
+- Column: HBase, Cassandra
+- Graph: Neo4j
+]
 ---
 
 # UML
+http://www.agiledata.org/essays/dataModeling101.html
+
+http://www.tomjewett.com/dbdesign/dbdesign.php?page=intro.html
+
+https://sparxsystems.com.au/downloads/whitepapers/Database_Modeling_In_UML.pdf
+
+- Unified Modeling Language
+- 0..* : 0 to many
+- 1..* : 1 to many
+- 1..1 : 1 to 1
+
+---
+<img  height=650px src='/CS/Day14/uml.png'>
 ---
 
-# JOINS
+# Keys
+- Primary Keys
+  + A field (or collection of fields) that represent a unique row
+- Foreign Keys
+  +  A field (or collection of fields) in one table that uniquely identifies a row of another table
+- Cascade
+- Restrict / No Action
+- Constraint 
+
+---
+```sql
+  CREATE TABLE Supplier (
+     SupplierNumber  INTEGER NOT NULL,
+     Name            VARCHAR(20) NOT NULL,
+     Address         VARCHAR(50) NOT NULL,
+     Type            VARCHAR(10),
+     CONSTRAINT supplier_pk PRIMARY KEY(SupplierNumber),
+     CONSTRAINT number_value CHECK (SupplierNumber > 0) )
+
+  CREATE TABLE Invoices (
+     InvoiceNumber   INTEGER NOT NULL,
+     SupplierNumber  INTEGER NOT NULL,
+     Text            VARCHAR(4096),
+     CONSTRAINT invoice_pk PRIMARY KEY(InvoiceNumber),
+     CONSTRAINT inumber_value CHECK (InvoiceNumber > 0),
+     CONSTRAINT supplier_fk FOREIGN KEY(SupplierNumber)
+        REFERENCES Supplier(SupplierNumber)
+        ON UPDATE CASCADE ON DELETE RESTRICT )
+```
 ---
 
 # Normal Form
+1. To free the collection of relations from undesirable insertion, update and deletion dependencies;
+2. To reduce the need for restructuring the collection of relations, as new types of data are introduced, and thus increase the life span of application programs;
+3. To make the relational model more informative to users;
+4. To make the collection of relations neutral to the query statistics, where these statistics are liable to change as time goes by.
+— E.F. Codd, "Further Normalization of the Data Base Relational Model" 1970
+
+http://www.bkent.net/Doc/simple5.htm
+
+https://en.wikipedia.org/wiki/Database_normalization
 ---
+
+# Update anomaly
+>The same information can be expressed on multiple rows; therefore updates to the relation may result in logical inconsistencies. For example, each record in an "Employees' Skills" relation might contain an Employee ID, Employee Address, and Skill; thus a change of address for a particular employee may need to be applied to multiple records (one for each skill). If the update is only partially successful – the employee's address is updated on some records but not others – then the relation is left in an inconsistent state. Specifically, the relation provides conflicting answers to the question of what this particular employee's address is. This phenomenon is known as an update anomaly.
+
+---
+
+# Insertion anomaly
+>There are circumstances in which certain facts cannot be recorded at all. For example, each record in a "Faculty and Their Courses" relation might contain a Faculty ID, Faculty Name, Faculty Hire Date, and Course Code. Therefore we can record the details of any faculty member who teaches at least one course, but we cannot record a newly hired faculty member who has not yet been assigned to teach any courses, except by setting the Course Code to null. This phenomenon is known as an insertion anomaly.
+
+---
+
+#Deletion anomaly
+>Under certain circumstances, deletion of data representing certain facts necessitates deletion of data representing completely different facts. The "Faculty and Their Courses" relation described in the previous example suffers from this type of anomaly, for if a faculty member temporarily ceases to be assigned to any courses, we must delete the last of the records on which that faculty member appears, effectively also deleting the faculty member, unless we set the Course Code to null. This phenomenon is known as a deletion anomaly.
+---
+
+# First Normal Form - 1NF
+> A relation is in first normal form if and only if the domain of each attribute contains only atomic (indivisible) values, and the value of each attribute contains only a single value from that domain.
+ 
+
+1. There's no top-to-bottom ordering to the rows.
+2. There's no left-to-right ordering to the columns.
+3. There are no duplicate rows.
+4. Every row-and-column intersection contains exactly one value from the applicable domain (and nothing else).
+5. All columns are regular [i.e. rows have no hidden components such as row IDs, object IDs, or hidden timestamps]. 
+
+https://en.wikipedia.org/wiki/First_normal_form
+
+---
+
+# Second Normal Form - 2NF
+>A relation is 2NF if it is in 1NF and no non-prime attribute is dependent on any proper subset of any candidate key of the relation. A non-prime attribute of a relation is an attribute that is not a part of any candidate key of the relation.
+
+|Manufacturer  |Model |Model Full Name |Manufacturer Country
+| --- | --- | --- | --- |
+|Forte| X-Prime| Forte X-Prime| Italy
+|Forte| Ultraclean | Forte Ultraclean | Italy
+|Dent-o-Fresh|  EZbrush| Dent-o-Fresh EZbrush | USA
+|Kobayashi| ST-60| Kobayashi ST-60 |Japan
+|Hoch|  Toothmaster| Hoch Toothmaster | Germany
+|Hoch|  X-Prime |Hoch X-Prime | Germany
+
+https://en.wikipedia.org/wiki/Second_normal_form
+---
+# Third Normal Form - 3NF
+> A relation is in 3NF if it is in 2NF and all the attributes in a table are determined only by the candidate keys of that relation and not by any non-prime attributes.
+
+"Every non-key attribute must provide a fact about the key, the whole key, and nothing but the key."
+
+
+table:tournament
+
+|Tournament  |Year | Winner | Winner Date of Birth|
+| --- | --- |--- | --- |
+|Indiana Invitational | 1998 | Al Fredrickson|  21 July 1975
+|Cleveland Open | 1999 | Bob Albertson |28 September 1968
+|Des Moines Masters | 1999  |Al Fredrickson  |21 July 1975
+|Indiana Invitational|  1999 | Chip Masterson  |14 March 1977
+
+https://en.wikipedia.org/wiki/Third_normal_form
+---
+# Boyce–Codd normal form - BCNF - 3.5NF
+>Only in rare cases does a 3NF table not meet the requirements of BCNF. A 3NF table that does not have multiple overlapping candidate keys is guaranteed to be in BCNF
+
+Today's Court Bookings
+
+
+|Court |Start Time | End Time | Rate Type|
+| --- | --- | --- | --- |
+|1 |09:30 |10:30| SAVER
+|1 |11:00 |12:00| SAVER
+|1 |14:00 |15:30| STANDARD
+|2 |10:00 |11:30| PREMIUM-B
+|2 |11:30 |13:30| PREMIUM-B
+|2 |15:00 |16:30| PREMIUM-A
+
+https://en.wikipedia.org/wiki/Boyce%E2%80%93Codd_normal_form
+
+---
+# Fifth Normal Form - 5NF
+---
+# Sixth Normal Form - 6NF
+---
+# JOINS
+---
+
+
 
 # Keys and Indexes
 ---
