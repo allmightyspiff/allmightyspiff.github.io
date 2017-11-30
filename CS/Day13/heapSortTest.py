@@ -25,12 +25,13 @@ class heapSort():
     def sort(self, array):
         size = len(array)
         # Build the max heap
-        for i in range(size, -1, -1):
+        for i in range(size - 1 , -1, -1):
             self.heapify(array, size, i)
 
         for i in range(size - 1, 0, -1):
-            # Swap top and last elements
+            # index 0 is biggest, so it goes do the end
             array[i], array[0] = array[0], array[i]
+            # reheap the array, ignoring the last element now
             self.heapify(array, i, 0)
 
 

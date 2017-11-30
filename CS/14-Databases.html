@@ -115,6 +115,35 @@ https://pythonspot.com/en/orm-with-sqlalchemy/
 - Its OK to still manaully write SQL queries
 ---
 
+```python
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+Base = declarative_base()
+class DB():
+    __init__(self):
+        engine = create_engine('sqlite:///', echo=True)
+        self.Session = sessionmaker(bind=engine)
+
+class User(Base):
+     __tablename__ = 'users'
+
+     id = Column(Integer, primary_key=True)
+     name = Column(String)
+     fullname = Column(String)
+     password = Column(String)
+
+     def __repr__(self):
+        return "<User(name='%s', fullname='%s', password='%s')>" % 
+                     (self.name, self.fullname, self.password)
+```
+```python
+db = DB()
+user = db.session.query(User).one()
+```
+---
 # Types of Databases
 .columnA[
 ## SQL
@@ -222,6 +251,39 @@ https://en.wikipedia.org/wiki/First_normal_form
 
 ---
 
+
+#### SalesStaff:
+
+| EmployeeID | Name | Office | Phone | Customer1 | Customer2 | Customer3 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Bob | Houston | 123-456-7890 | A | B | |
+| 2 | Alice | Dallas | 123-123-1234 | G | | | 
+| 3 | Chris | Spring | 123-333-3333 | C | D | E | 
+
+
+.columnA[
+####Employees:
+
+| EmployeeID | Name | Office | Number |
+| --- | --- | --- | --- |
+| 1 | Bob | Houston | 123-456-7890 | 
+| 2 | Alice | Dallas | 123-123-1234 | 
+| 3 | Chris | Spring |  123-333-3333  |
+
+]
+.columnB[
+####Customers:
+
+|CustomerID | EmployeeID | Name |
+| --- | --- | --- |
+| 1 | 1 | A |
+| 2 | 1 | B |
+| 3 | 2 | G | 
+| 4 | 3 | C |
+|5 | 3 | D |
+|6 | 3 | E | 
+]
+---
 # Second Normal Form - 2NF
 >A relation is 2NF if it is in 1NF and no non-prime attribute is dependent on any proper subset of any candidate key of the relation. A non-prime attribute of a relation is an attribute that is not a part of any candidate key of the relation.
 
@@ -253,8 +315,10 @@ table:tournament
 
 https://en.wikipedia.org/wiki/Third_normal_form
 ---
-# Boyce–Codd normal form - BCNF - 3.5NF
+# Boyce–Codd normal form - BCNF
 >Only in rare cases does a 3NF table not meet the requirements of BCNF. A 3NF table that does not have multiple overlapping candidate keys is guaranteed to be in BCNF
+
+BNCF cannot always be obtained, while 3NF can always be obtained.
 
 Today's Court Bookings
 
@@ -271,26 +335,139 @@ Today's Court Bookings
 https://en.wikipedia.org/wiki/Boyce%E2%80%93Codd_normal_form
 
 ---
-# Fifth Normal Form - 5NF
----
-# Sixth Normal Form - 6NF
----
+
 # JOINS
+https://en.wikipedia.org/wiki/Join_(SQL)
+- Inner
+- Left / Right
+- Outer
+
+.columnA[
+| Name | departmentID |
+| --- | --- |
+| Rafferty | 31  |
+| Jones | 33 | 
+| Heisenberg | 33 |
+| Robinson | 34 | 
+| Smith | 34 | 
+| Williams | NULL |
+]
+.columnB[
+| departmentID | Name | 
+| --- | --- |
+| 31 | Sales | 
+| 33 | Engineering | 
+| 34 | Clerical | 
+| 35 | Marketing |
+]
+---
+
+# Inner Join
+```sql
+SELECT employee.LastName, employee.DepartmentID, department.DepartmentName 
+FROM employee 
+INNER JOIN department ON
+employee.DepartmentID = department.DepartmentID
+```
+
+| Employee.Name | Employee.DepartmentId | Department.DepartmentName | 
+| --- | --- | --- |
+| Robinson | 34 | Clerical | 
+| Jones | 33 | Engineering |
+| Smith | 34 | Clerical | 
+| Heisenberg | 33 | Engineering |
+| Rafferty | 31 | Sales | 
+
+---
+
+# Left Outer Join
+```sql
+SELECT employee.LastName, employee.DepartmentID, department.DepartmentName 
+FROM employee 
+LEFT OUTER JOIN department ON employee.DepartmentID = department.DepartmentID;
+```
+
+| Employee.Name | Employee.DepartmentId | Department.DepartmentName | 
+| --- | --- | --- |
+| Robinson | 34 | Clerical | 
+| Jones | 33 | Engineering |
+| Smith | 34 | Clerical | 
+| Heisenberg | 33 | Engineering |
+| Rafferty | 31 | Sales | 
+| Williams | NULL | NULL | 
+---
+
+# Right Outer Join
+```sql
+SELECT employee.LastName, employee.DepartmentID, department.DepartmentName 
+FROM employee RIGHT OUTER JOIN department
+  ON employee.DepartmentID = department.DepartmentID;
+```
+
+| Employee.Name | Employee.DepartmentId | Department.DepartmentName | 
+| --- | --- | --- |
+| Robinson | 34 | Clerical | 
+| Jones | 33 | Engineering |
+| Smith | 34 | Clerical | 
+| Heisenberg | 33 | Engineering |
+| Rafferty | 31 | Sales | 
+| NULL | NULL | Marketing |
 ---
 
 
+# ACID
+- A: Atomicity requires that each transaction be "all or nothing"
+- C: The consistency property ensures that any transaction will bring the database from one valid state to another.
+- I: The isolation property ensures that the concurrent execution of transactions results in a system state that would be obtained if transactions were executed sequentially,
+- D: The durability property ensures that once a transaction has been committed, it will remain so, even in the event of power loss, crashes, or errors.
+---
 
-# Keys and Indexes
+#Transactions and Concurrency
+```sql
+BEGIN TRANSACTION;
+INSERT INTO table VALUES (1,1,1,1);
+INSERT INTO table VALUES (2,2,2,2);
+...
+COMMIT;
+```
+- Only need 1 table lock
+- Faster than individual inserts, or one large insert
+---
+
+# Views
+>A VIEW is a virtual table, through which a selective portion of the data from one or more tables can be seen. Views do not contain data of their own. They are used to restrict access to the database or to hide data complexity.
+
+```sql
+CREATE VIEW view_name 
+AS 
+SELECT column_list 
+FROM table_name [WHERE condition]; 
+```
+---
+
+# Stored Procedures
+> Precompiled statements that generally run faster than normal statements
+
+```sql
+mysql> CREATE FUNCTION hello (s CHAR(20))
+mysql> RETURNS CHAR(50) DETERMINISTIC
+    -> RETURN CONCAT('Hello, ',s,'!');
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT hello('world');
++----------------+
+| hello('world') |
++----------------+
+| Hello, world!  |
++----------------+
+1 row in set (0.00 sec)
+```
 ---
 
 # Clustering
 ---
 
-# Transactions and Concurrency
----
 
-
-# Test Driven Development
 
 </textarea>
     <script src="/remark/remark-latest.min.js"></script>
