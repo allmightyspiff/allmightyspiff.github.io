@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Day 01</title>
+    <title>Day 01 - Intro </title>
     <meta charset="utf-8">
     <style>
       body { 
         font-family: monospace; 
+        font-size: 2em;
       }
       h1 {
         font-family: monospace;
@@ -23,10 +24,14 @@
       .remark-slide-content {
         background-color: #252839;
         color: #E1F4EC;
+        font-size: 25px;
+        padding: 0em 1em 1em 1em;
       }
     img {background-color: #E1F4EC ;}
     .columnA {float:left; width: 49%;}
     .columnB {float:right; width: 49%; }
+    .columnD {float:right; width: 40%; }
+    .columnC {float:right; width: 60%; }
     a {color:#A57712; }
     hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
     li {margin-bottom: .5em; margin-top: .5em;}
@@ -34,14 +39,26 @@
         color: #F2B632;
         font-family: Palatino;
         font-weight: normal;
+        font-size: 35px;
      }
      .MathJax {
      font-size: 8em !important;
      color: #D69ECA !important;
     }
-
+    th {
+      color:#A57712 ;
+    }
+    .brightGold {
+      color: #F2B632
+    }
     .lightPurple {
-        color: #8834A5;
+      color: #8834A5 ;
+    }
+    .bigO {
+      height: 475px;
+    }
+    .remark-code{
+        font-size: 20px;
     }
     </style>
 <!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
@@ -73,14 +90,15 @@ Christopher Gallo
 
 # This Class
 - Core concepts behind computer science
-    + Sorting Algorithms
+    + Algorithms (Sorting and Searching)
     + Datastructures
+    + Physical considerations
 - Practice interview questions
-- Practice solving problems with code
+- Programming Patterns
 - A deeper understanding of how python works 
 
 
-## Schoology is QN84Z-788JM
+## Schoology is BG9RJ-TQQ5T
 
 - https://allmightyspiff.github.io/CS
 - https://github.com/allmightyspiff/allmightyspiff.github.io/
@@ -92,6 +110,7 @@ If you don't understand something please ask
 ---
 
 # When will you need this?
+- Picking the right tool for the job
 - The Interview
 - Solving complicated problems
 - Increasing application performance
@@ -103,7 +122,7 @@ If you don't understand something please ask
 - Please ask questions
     + Now
     + Later
-    +  <span class='lightPurple'>\#cs-htx-10-2017</span> in slack
+    +  <span class='lightPurple'>\#cs-htx-12-2017</span> in slack
     +  <span class='lightPurple'>@cgallo</span> in slack
 - Learn what you can
 
@@ -363,7 +382,7 @@ The sum of all the multiples of 3 or 5 below 50000000 is 583333291666668
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
     <script type="text/javascript">
       var slideshow = remark.create({
-        highlightStyle: 'solarized-dark',
+        highlightStyle: 'default',
         ratio: '16:9',
         highlightLines: true
       });
