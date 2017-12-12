@@ -128,31 +128,55 @@ If you don't understand something please ask
 
 ---
 
-# Python skeleton code
+# Source Material
++ https://en.wikipedia.org/wiki/The_Art_of_Computer_Programming Donald E. Knuth
++ wikipedia https://en.wikipedia.org/wiki/Computer_science
++ Interactive Python http://interactivepython.org/
++ GeeksForGeeks http://www.geeksforgeeks.org/bubble-sort/
+---
+
+# Programming Patterns
+https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612
+https://en.wikipedia.org/wiki/Design_Patterns
+- Creational Patterns
+- Structural Patterns
+- Behavioral Patterns
+- Concurrency Patterns
+
+---
+
+# Iterator Behavioral Pattern
+- What problems can the Iterator design pattern solve? 
+  - The elements of an aggregate object should be accessed and traversed without exposing its representation (data structures).
+  - New traversal operations should be defined for an aggregate object without changing its interface.
+- What solution does the Iterator design pattern describe?
+  - Define a separate (iterator) object that encapsulates accessing and traversing an aggregate object.
+  - Clients use an iterator to access and traverse an aggregate without knowing its representation (data structures).
+---
+
+# Iterators in Python
 
 ```python
-"""
-@package examples 
-@author Christopher Gallo
-This is the base for all examples. Put what your example does here.
-"""
-from pprint import pprint as pp
+class yrange():
+    def __init__(self, n):
+        self.i = 0
+        self.n = n
 
-class example():
+    def __iter__(self):
+        return self
 
-    def __init__(self):
-        """Setup
-        """
-        pass
-
-    def main(self):
-        """Says Hello World 
-        """
-        print("Hello World")
+    def next(self):
+        if self.i < self.n:
+            i = self.i
+            self.i += 1
+            return i
+        else:
+            raise StopIteration()
 
 if __name__ == "__main__":
-    main = example()
-    main.main()
+    myrange = yrange()
+    for x in myrange(3):
+        print(x)
 ```
 
 
@@ -207,13 +231,6 @@ lets stop and think this through
 # Create the algorithm
 
 ```python
-"""
-@package examples 
-@author Christopher Gallo
-Bubble Sorting
-"""
-from pprint import pprint as pp
-
 class example():
 
     def bubble_sort(self, my_array):
