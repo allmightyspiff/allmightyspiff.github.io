@@ -30,6 +30,8 @@
     img {background-color: #E1F4EC ;}
     .columnA {float:left; width: 49%;}
     .columnB {float:right; width: 49%; }
+    .columnD {float:right; width: 39%; }
+    .columnC {float:left; width: 60%; }
     a {color:#A57712; }
     hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
     li {margin-bottom: .5em; margin-top: .5em;}
@@ -37,13 +39,25 @@
         color: #F2B632;
         font-family: Palatino;
         font-weight: normal;
+        font-size: 35px;
      }
      .MathJax {
      font-size: 8em !important;
      color: #D69ECA !important;
     }
+    table {
+        table-layout: fixed;
+    }
     th {
-      color:#A57712 ;
+      border-color: #8834A5;
+      padding: 1px;
+      border: solid;
+    }
+    td {
+        border: solid;
+        border-color: #8834A5;
+        text-align: center;
+        font-size: 20px;
     }
     .brightGold {
       color: #F2B632
@@ -51,11 +65,17 @@
     .lightPurple {
       color: #8834A5 ;
     }
+    .darkPurle {
+        .color: #27182C;
+    }
     .bigO {
       height: 475px;
     }
     .remark-code{
         font-size: 20px;
+    }
+    .good{
+        color: green;
     }
 
     </style>
@@ -85,7 +105,27 @@ class: center, middle
 
 ---
 
-# Programming Pattern
+# Facade Programming Pattern
++ make a software library easier to use and understand
++ reduce dependencies of outside code on the inner workings of a library
++ wrap a poorly designed collection of APIs with a single well-designed API.
+
+```python
+class ComputerFacade(object):
+    def __init__(self):
+        self.cpu = CPU()
+        self.memory = Memory()
+        self.ssd = SolidStateDrive()
+
+    def start(self):
+        self.cpu.freeze()
+        self.memory.load("0x00", self.ssd.read("100", "1024"))
+        self.cpu.jump("0x00")
+        self.cpu.execute()
+
+computer_facade = ComputerFacade()
+computer_facade.start()
+```
 ---
 
 # Hardware 
@@ -115,14 +155,58 @@ https://youtu.be/IAkj32VPcUE
 
 ---
 
-# Python -> Assembly
+# Python Bytecode
+.columnD[
+```python
+import dis      
+def hello():
+    test  = 0 
+    if test  == 1:
+        print("Hello World")
+    else:
+        print("TEST")
+
+if __name__ == "__main__":
+
+    dis.dis(hello)
+```
+]
+.columnC[
+```
+3   0 LOAD_CONST         1 (0)
+    2 STORE_FAST         0 (test)
+
+4   4 LOAD_FAST          0 (test)
+    6 LOAD_CONST         2 (1)
+    8 COMPARE_OP         2 (==)
+    10 POP_JUMP_IF_FALSE 22
+
+5   12 LOAD_GLOBAL       0 (print)
+    14 LOAD_CONST        3 ('Hello World')
+    16 CALL_FUNCTION     1
+    18 POP_TOP
+    20 JUMP_FORWARD      8 (to 30)
+
+7>> 22 LOAD_GLOBAL       0 (print)
+    24 LOAD_CONST        4 ('TEST')
+    26 CALL_FUNCTION     1
+    28 POP_TOP
+ >> 30 LOAD_CONST        0 (None)
+    32 RETURN_VALUE
+```
+]
+
+https://stackoverflow.com/questions/12673074/how-should-i-understand-the-output-of-dis-dis
+
+http://effbot.org/pyfaq/how-do-i-create-a-pyc-file.htm
 ---
 
-# Assembly Basics
+# Full Adder
 
-How 2 memory locations are added to together
-logic gates
+<img width=610px src='/CS/Day2/Fulladder.gif'>
 
+https://youtu.be/mZ9VWA4cTbE -  https://youtu.be/VPw9vPN-3ac 
+https://en.wikipedia.org/wiki/Adder_(electronics)
 ---
 
 # Performance 

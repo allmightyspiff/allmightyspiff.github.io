@@ -1,3 +1,5 @@
+print("hello")
+
 class bubbleSort():
 
     def sort(self,my_array):
