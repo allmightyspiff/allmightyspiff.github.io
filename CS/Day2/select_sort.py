@@ -24,7 +24,7 @@ class selection_sort():
         return my_array
 
 if __name__ == "__main__":
-    my_array = [9, 4, 2, 6, 1, 0, 3, 5]
+    my_array = [9, 4, 2,11, 1, 0, 3, 5]
     main = selection_sort()
     result = main.sort(my_array)
     print(result)

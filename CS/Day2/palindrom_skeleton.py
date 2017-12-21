@@ -9,7 +9,7 @@ import string
 class palindrome():
 
     def pal_check(self, s):
-        s = self.sanitize_2(s)
+        s = self.sanitize(s)
         z = list(s)
         z.reverse()
         if list(s) == z:
@@ -25,21 +25,16 @@ class palindrome():
 
         return clean_s
 
-    def sanitize_2(self, s):
-        s = s.lower()
-        good = string.ascii_lowercase
-        bad = string.punctuation + string.whitespace + "'’"
-        xlate = s.maketrans(good, good,bad)
-        clean = s.translate(xlate)
-        return s.translate(xlate)
-
-
 if __name__ == "__main__":
     my_string = [
     	'Aibohphobia',
-    	'Madam, I’m Adam.'
+    	"Madam, I'm Adam.",
+        "testing",
+        "Goodbye World"
     ]
     main = palindrome()
     for s in my_string:
         if main.pal_check(s):
             print("%s is a palindrome" % s)
+        else:
+            print("%s NOT a palindrome" % s)

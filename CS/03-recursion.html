@@ -86,6 +86,28 @@ class: center, middle
 
 ---
 
+# Anti-Pattern Error Hiding
+https://en.wikipedia.org/wiki/Error_hiding
+
+.columnA[
+```python
+try:
+    doSomething()
+except Exception as error:
+    print('ERROR')
+```
+
+```python
+try:
+    doSomething()
+except ValueError as error:
+    print("doSomething failed with %s" % 
+           repr(error)
+         )
+```
+]
+---
+
 # The Stack
 
 .columnA[
@@ -221,6 +243,7 @@ if __name__ == "__main__":
 4. RecursionError: maximum recursion depth exceeded in comparison
 
 ---
+
 
 # Factorial Recursion
 
@@ -369,6 +392,27 @@ def factorial(self, n):
 
 ---
 
+# Tail and Head recursion
+- Tail recursion is when the recursive statement is last thing to be executed.
+
+```python
+def headFactorial(n):
+    if n == 0:
+        return 1
+    return n * tailFactorial(n-1)
+
+def tailFactorial(n, a = 1):
+    if n == 0:
+        return a
+    return tailFactorial(n - 1, n * a)
+```
+
+http://neopythonic.blogspot.com.au/2009/04/tail-recursion-elimination.html
+
+http://neopythonic.blogspot.com.au/2009/04/final-words-on-tail-calls.html
+>" Personally, I think it is a fine feature for some languages, but I don't think it fits Python" -- Guido van Rossum
+---
+
 # Loops v Recursion
 .columnA[
 - Nested loops can solve most problems
@@ -407,14 +451,15 @@ Print out all directories from a start location
 # Interview Answer
 
 ```python
-def print_directory_contents(sPath):
-    import os                                       
-    for sChild in os.listdir(sPath):                
-        sChildPath = os.path.join(sPath,sChild)
+import os
+def print_dir(self, sPath):
+    for sChild in os.listdir(sPath):
+
+        sChildPath = os.path.join(sPath, sChild)
+
         if os.path.isdir(sChildPath):
-            print_directory_contents(sChildPath)
-        else:
-            continue
+            print(sChildPath)
+            print_dir(sChildPath)
             
 ```
 
