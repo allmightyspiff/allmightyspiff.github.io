@@ -5,8 +5,8 @@ class print_dir():
     def print_dir(self,sPath):
         for sChild in os.listdir(sPath):                
             sChildPath = os.path.join(sPath,sChild)
+            print(sChildPath)
             if os.path.isdir(sChildPath):
-                print(sChildPath)
                 self.print_dir(sChildPath)
                 
 

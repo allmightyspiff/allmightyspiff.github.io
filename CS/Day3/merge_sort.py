@@ -34,9 +34,9 @@ class mergeSort():
         else:
             middle = len(x)//2
             #Start to Middle
-            a = x[:middle]
+            a = self.sort(x[:middle])
             # Middle to end
-            b = x[middle:]
+            b = self.sort(x[middle:])
             return self.merge(a,b)
 
 
