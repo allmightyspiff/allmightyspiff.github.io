@@ -78,13 +78,46 @@ class: center, middle
 
 
 # TODO
-
+- Pattern
 - Linear Search
 - Binary Search
 - Pathfinding
 - Interview Questions
 
 ---
+
+# Magic Numbers
+- Unique values with unexplained meaning or multiple occurrences which could (preferably) be replaced with named constants
+- The use of unnamed magic numbers in code obscures the developers' intent in choosing that number
+- An example of a non-intuitively named constant is int SIXTEEN = 16, while int NUMBER_OF_BITS = 16 is more descriptive.
+
+```
+#BAD
+   for i from 1 to 52
+       j = i + randomInt(53 - i) - 1
+       a.swapEntries(i, j)
+#GOOD
+   constant int deckSize := 52
+   for i from 1 to deckSize
+       j = i + randomInt(deckSize + 1 - i) - 1
+       a.swapEntries(i, j)
+```
+
+
+https://en.wikipedia.org/wiki/Magic_number_(programming)#Unnamed_numerical_constants
+
+---
+
+# Good Magic Numbers
+- the use of 0 and 1 as initial or incremental values in a for loop, such as for (int i = 0; i < max; i += 1)
+- the use of 2 to check whether a number is even or odd
+- the use of simple arithmetic constants, e.g., in expressions such as circumference = 2 * Math.PI * radius
+- the use of 100 to calculate percentages
+- the use of factors of 10 to convert metric values, e.g. convert grams to kilograms by dividing by 1000
+- the use of time-related constants to convert time values, e.g. convert milliseconds to seconds by multiplying by 1000, or convert minutes to seconds by multiplying by 60.
+
+---
+
 
 # Linear Search
 - O(n) complexity
@@ -141,7 +174,26 @@ def binarySearch(self,array, item):
 
 https://docs.python.org/3.6/library/bisect.html
 https://github.com/python/cpython/blob/3.6/Lib/bisect.py#L67
+```python
+def bisect_left(a, x, lo=0, hi=None):
+    """Return the index where to insert item x in list a, assuming a is sorted.
+    The return value i is such that all e in a[:i] have e < x, and all e in
+    a[i:] have e >= x.  So if x already appears in the list, a.insert(x) will
+    insert just before the leftmost x already there.
+    Optional args lo (default 0) and hi (default len(a)) bound the
+    slice of a to be searched.
+    """
 
+    if lo < 0:
+        raise ValueError('lo must be non-negative')
+    if hi is None:
+        hi = len(a)
+    while lo < hi:
+        mid = (lo+hi)//2
+        if a[mid] < x: lo = mid+1
+        else: hi = mid
+    return lo
+```
 ---
 
 # Path Finding
