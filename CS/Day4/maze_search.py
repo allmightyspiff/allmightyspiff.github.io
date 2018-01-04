@@ -26,7 +26,9 @@ class Cell(object):
         else:
             string = str(self.g)
             return string + " " * (2 - len(string) )
-        
+
+    def __lt__(self, other):
+        return self.g > other.g
 
 
 class AStar(object):
@@ -151,7 +153,7 @@ class AStar(object):
                         # if adj cell in open list, check if current path is
                         # better than the one previously found
                         # for this adj cell.
-                        if adj_cell.g > cell.g + 10:
+                        if adj_cell > cell:
                             self.update_cell(adj_cell, cell)
                     else:
                         self.update_cell(adj_cell, cell)

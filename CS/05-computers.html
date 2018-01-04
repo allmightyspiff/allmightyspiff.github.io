@@ -77,6 +77,14 @@ class: center, middle
 ---
 
 
+# Meltdown and Spectre
+Bugs in modern computers leak passwords and sensitive data.
+
+https://googleprojectzero.blogspot.co.at/2018/01/reading-privileged-memory-with-side.html
+
+https://spectreattack.com/
+---
+
 # Memory Management 
 - OS reservation
 - 4k page size
@@ -85,6 +93,7 @@ class: center, middle
   + Memory management in Python involves a private heap containing all Python objects and data structures
   + It is important to understand that the management of the Python heap is performed by the interpreter itself and that the user has no control over it
 - Out of Memory
+- https://docs.python.org/3.6/c-api/memory.html
 
 ---
 
@@ -93,18 +102,18 @@ class: center, middle
   + 100 = (1 `*` 10^2) + (0 `*` 10^1) + (0 `*` 10^0)
   + 100 = (1 `*` 2^2) + (0 `*` 2^1) + (0 `*` 2^0)
 - Float
+  -  1/10 = 0.0001100110011001100110011001100110011001100110011..
+  - dont use for $
   - https://docs.python.org/3/tutorial/floatingpoint.html
+  - http://cstl-csm.semo.edu/xzhang/Class%20Folder/CS280/Workbook_HTML/FLOATING_tut.htm
 
 | Binary Value | Biased Exponent  | Sign, Exponent, Mantissa |
 | --- | --- | --- |
 | -1.11  | 127 | 1  01111111  11000000000000000000000|
 | +1101.101 | 130 |0  10000010  10110100000000000000000|
 | -.00101 | 124 |1  01111100  01000000000000000000000|
-| +100111.0 | 132 |0  10000100  00111000000000000000000|
-| +.0000001101011 | 120| 0  01111000  10101100000000000000000|
  
-  -  1/10 = 0.0001100110011001100110011001100110011001100110011..
-  - dont use for $
+
 
 ???
 http://cstl-csm.semo.edu/xzhang/Class%20Folder/CS280/Workbook_HTML/FLOATING_tut.htm
@@ -286,6 +295,63 @@ gc.disable() - Disables automatic garbage collection.
 
 ---
 
+# What is the output?
+```python
+def f(x,l=[]):
+    for i in range(x):
+        l.append(i*i)
+    print(l) 
+
+f(2)
+f(3)
+```
+
+???
+what actually happens is that the new default list is created only once when the function is defined, and that same list is then used subsequently whenever f is invoked without a list argument.
+---
+
+```python
+from __future__ import print_function
+
+def equal(a,b):
+    print("%s is %s? " % (a, b), end='')
+    if a is b:
+        print("TRUE")
+    else:
+        print("FALSE")
+
+a = 11111
+b = 11111
+
+equal(a,b)
+b = b - 1
+equal(a,b)
+b = b + 1 
+equal(a,b)
+
+a = 2
+b = 2
+equal(a,b)
+b = b - 1
+equal(a,b)
+b = b + 1 
+equal(a,b)
+
+```
+---
+# Python and multi-threading. Is it a good idea? 
+List some ways to get some Python code to run in a parallel way.
+
+???
+Answer
+Python doesn't allow multi-threading in the truest sense of the word. It has a multi-threading package but if you want to multi-thread to speed your code up, then it's usually not a good idea to use it. Python has a construct called the Global Interpreter Lock (GIL). The GIL makes sure that only one of your 'threads' can execute at any one time. A thread acquires the GIL, does a little work, then passes the GIL onto the next thread. This happens very quickly so to the human eye it may seem like your threads are executing in parallel, but they are really just taking turns using the same CPU core. All this GIL passing adds overhead to execution. This means that if you want to make your code run faster then using the threading package often isn't a good idea.
+
+There are reasons to use Python's threading package. If you want to run some things simultaneously, and efficiency is not a concern, then it's totally fine and convenient. Or if you are running code that needs to wait for something (like some IO) then it could make a lot of sense. But the threading library won't let you use extra CPU cores.
+
+Multi-threading can be outsourced to the operating system (by doing multi-processing), some external application that calls your Python code (eg, Spark or Hadoop), or some code that your Python code calls (eg: you could have your Python code call a C function that does the expensive multi-threaded stuff).
+
+Why This Matters
+Because the GIL is an A-hole. Lots of people spend a lot of time trying to find bottlenecks in their fancy Python multi-threaded code before they learn what the GIL is.
 
 # Why multiprocessing?
 
@@ -295,6 +361,8 @@ gc.disable() - Disables automatic garbage collection.
 - https://www.youtube.com/watch?v=hf4MKeP5oxg
 - http://wltrimbl.github.io/2014-06-10-spelman/intermediate/python/04-multiprocessing.html
 - https://devopslog.wordpress.com/2012/04/15/mergesort-example-using-python-multiprocessing/
+- https://www.codementor.io/sheena/essential-python-interview-questions-du107ozr6
+- https://www.toptal.com/python/interview-questions
 
 
 </textarea>
