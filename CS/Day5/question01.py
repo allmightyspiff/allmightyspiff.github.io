@@ -1,4 +1,6 @@
-def f(x,l=[]):
+def f(x,l=None):
+    if l is None:
+        l = []
     print(l)
     for i in range(x):
         l.append(i*i)
