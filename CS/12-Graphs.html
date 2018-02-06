@@ -131,6 +131,14 @@ class Ellipse(Graphic):
     def print(self):
         print("Ellipse:", self.name)
 ```
+
+```python
+class Square(Graphic):
+    def __init__(self, name):
+        self.name = name
+    def print(self):
+        print("Square:", self.name)
+```
 ]
 ---
 # Graphs
@@ -149,6 +157,15 @@ https://en.wikipedia.org/wiki/Graph_theory
 
 >The order of a graph is `V`, its number of vertices. The size of a graph is `E`, its number of edges.
 
+---
+
+# Adjacency Matrix
+>Adjacency Matrix is a 2D array of size V x V where V is the number of vertices in a graph. Let the 2D array be adj[][], a slot adj[i][j] = 1 indicates that there is an edge from vertex i to vertex j. Adjacency matrix for undirected graph is always symmetric. Adjacency Matrix is also used to represent weighted graphs. If adj[i][j] = w, then there is an edge from vertex i to vertex j with weight w
+
+---
+
+# Adjacency List
+>An array of linked lists is used. Size of the array is equal to number of vertices. Let the array be array[]. An entry array[i] represents the linked list of vertices adjacent to the ith vertex. This representation can also be used to represent a weighted graph. The weights of edges can be stored in nodes of linked lists. Following is adjacency list representation of the above graph.
 ---
 
 # Graph Theory - What is the point?!
@@ -211,6 +228,8 @@ https://developers.facebook.com/docs/graph-api/using-graph-api/#fieldexpansion
 
 https://developers.facebook.com/tools/explorer/?method=GET
 
+https://developers.facebook.com/docs/graph-api/reference/photo/
+
 <img src='/CS/Day12/facebook.png'>
 ---
 
@@ -222,14 +241,6 @@ https://stackoverflow.com/questions/19472530/representing-graphs-data-structure-
 https://www.python-course.eu/graphs_python.php
 ---
 
-# Adjacency Matrix
->Adjacency Matrix is a 2D array of size V x V where V is the number of vertices in a graph. Let the 2D array be adj[][], a slot adj[i][j] = 1 indicates that there is an edge from vertex i to vertex j. Adjacency matrix for undirected graph is always symmetric. Adjacency Matrix is also used to represent weighted graphs. If adj[i][j] = w, then there is an edge from vertex i to vertex j with weight w
-
----
-
-# Adjacency List
->An array of linked lists is used. Size of the array is equal to number of vertices. Let the array be array[]. An entry array[i] represents the linked list of vertices adjacent to the ith vertex. This representation can also be used to represent a weighted graph. The weights of edges can be stored in nodes of linked lists. Following is adjacency list representation of the above graph.
----
 
 # Shortest Path Interview Question
 > Explain the shortest path algorithm

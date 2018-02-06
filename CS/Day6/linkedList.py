@@ -36,10 +36,10 @@ class linked_list():
     def add_node(self, node):
         if self.head is None:
             self.head = node
-            self.current = node
+            self.tail = node
         else:
-            self.current.next = node
-            self.current = node 
+            self.tail.next = node
+            self.tail = node 
     def __str__(self):
         if self.head is None:
             return ''
