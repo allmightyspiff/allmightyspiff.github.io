@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Day 14 - Databases</title>
+    <meta charset="utf-8">
+    <style>
+      body { 
+        font-family: monospace; 
+        font-size: 2em;
+      }
+      h1 {
+        font-family: monospace;
+        color: #F2B632;
+      } 
+      h2 {
+        font-family: monospace;
+        color: #8834A5;
+      }
+      h3 {
+        color: #A57712;
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Courier New'; }
+      .remark-slide-content {
+        background-color: #252839;
+        color: #E1F4EC;
+        font-size: 25px;
+        padding: 0em 1em 1em 1em;
+      }
+    img {background-color: #E1F4EC ;}
+    .columnA {float:left; width: 49%;}
+    .columnB {float:right; width: 49%; }
+    .columnD {float:right; width: 39%; }
+    .columnC {float:left; width: 60%; }
+    a {color:#A57712; }
+    hr {border-color: #8834A5; background-color:#8834A5; border-width: 2px; border-style: solid; }
+    li {margin-bottom: .5em; margin-top: .5em;}
+    blockquote { 
+        color: #F2B632;
+        font-family: Palatino;
+        font-weight: normal;
+        font-size: 35px;
+     }
+     .MathJax {
+     font-size: 8em !important;
+     color: #D69ECA !important;
+    }
+    table {
+        table-layout: fixed;
+    }
+    th {
+      border-color: #8834A5;
+      padding: 10px;
+      border: solid;
+    }
+    td {
+        border: solid;
+        border-color: #8834A5;
+        text-align: center;
+    }
+    .brightGold {
+      color: #F2B632
+    }
+    .lightPurple {
+      color: #8834A5 ;
+    }
+    .darkPurle {
+        .color: #27182C;
+    }
+    .bigO {
+      height: 475px;
+    }
+    .remark-code{
+        font-size: 20px;
+    }
+
+    </style>
+<!-- <link rel="stylesheet" href="/remark/default.min.css"> -->
+  </head>
+  <body>
+    <!--#A57712  Dark Gold-->
+    <!--#E1F4EC  White Gold -->
+    <!--#F2B632  Bright Gold -->
+    <!--#27182C  Dark Purple -->
+    <!--#8834A5  Light Purple -->
+    <!--#D69ECA  White Purple -->
+    <textarea id="source">
+
+
+class: center, middle
+# .center[Data Structures]
+
+---
+
+# What is a Data Structure?
+>In computer science, a data structure is a particular way of organizing data in a computer so that it can be used efficiently. Generally built upon simpler primitive data types:
+
+--Donald Knuth, The Art of Computer Programming, vol. 1.
+
+???
+A general way of using a computer to organize data.
+
+---
+
+# Primitives
+A variable can be
+1. A primitive type. Int, char, boolean, float.
+2. Another varible.
+3. An Object
+
+Primitves keep track of a single data point. Data Structures help keep track of multiple or complex data points.
+
+---
+
+# Array
+An array is a collection of primitives.
+
+- O(n) size, cannot be changed
+- O(1) lookup speed
+
+| 0x000 | 0x008 | 0x016 | 0x024 | 
+| --- | --- | --- | --- |
+| a[0] | a[1] | a[2]| a[3] |
+| 't' | 'e' | 's' | 't' |
+
+---
+
+# A Basic Data Structure
+
+```pyhthon
+class point(x=0, y=0):
+  def __init__(self, x=0, y=0):
+    self.x = x
+    self.y = 0
+  def __eq__(self, b):
+    return self.x == b.x && self.y == b.y
+
+```
+
+---
+
+# Linked List
+.columnA[
+- Collection of nodes.
+- Each node has a pointed to the next
+- Easy to expand, insert, remove
+- Takes O(n) time to get to an element
+- O(2n) size, but can be easily added to.
+]
+
+.columnB[
+- Ideal for
+  - modifying members of the list, add / insert / remove
+  - Iterating through the list in order
+  - Can use multiple data types as elements
+- Not Ideal for 
+  + Randomly accessing members
+  + Uses more memory than arrays
+]
+
+https://www.codefellows.org/blog/implementing-a-singly-linked-list-in-python/
+
+---
+
+# Linked List Code
+```python
+class Node():
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
+class linked_list():
+    def __init__(self):
+        self.head = None
+        self.current = None
+        self.tail = None
+    def add_node(self, node):
+        if self.head is None:
+            self.head = node
+            self.tail = node
+        else:
+            self.tail.next = node
+            self.tail = node 
+if __name__ == "__main__":
+    my_list = linked_list()
+    my_list.add_node(Node('a'))
+    my_list.add_node(Node('b'))
+    my_list.add_node(Node(100))
+    print(my_list.head.next.data)
+```
+---
+
+# Linked List variations
+- doubly linked
+  + Linked list with a pointer going backwards as well as forwards.
+- queue
+  + Linked lists that only add nodes at the tail, and remove from the head
+- dequeue
+  + a generalization of stacks and queues (the name is pronounced “deck” and is short for “double-ended queue”)
+- stack
+  + Linked list that only add and remove nodes from the tail
+
+---
+
+# Hash Tables
+
+---
+
+# Hash Functions
+
+---
+
+# Hash Collisions
+
+---
+
+# Distributed and consistent Hashing
+
+---
+
+
+# Trees
+
+---
+
+# Binary Trees
+
+---
+
+# Red Black Tree
+
+---
+
+# Heap
+---
+
+</textarea>
+    <script src="/remark/remark-latest.min.js"></script>
+    <script src="/remark/jquery-2.2.4.min.js"></script>
+    <script src="/remark/highlight.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'default',
+        ratio: '16:9',
+        highlightLines: true
+      });
+      var hljs = hljs1.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
