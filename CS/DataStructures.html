@@ -131,7 +131,7 @@ An array is a collection of primitives.
 class point(x=0, y=0):
   def __init__(self, x=0, y=0):
     self.x = x
-    self.y = 0
+    self.y = y
   def __eq__(self, b):
     return self.x == b.x && self.y == b.y
 
@@ -206,16 +206,15 @@ if __name__ == "__main__":
 - Size varies, but usually O(n^2)
 - Requires a hash function and a unique key to identify elements
 
-| Id | Memory Location |
-| --- | --- |
-|0 |0x0001 |
-|1 |0x0002 |
-|2 |0x000A |
-|3 |0x00FF |
-|4 |0x0A01 |
-|5 |null   |
-|6 |null   |
-|7 |null   |
+| 0x000 | 0x004 | 0x008 | 0x016 | 0x024 | 0x032 |
+| --- | --- | --- | --- |
+| a['test'] | Null  | Null |  a['testing'] | Null| a['a'] |
+| 'some data' | Null | Null | 'Test Data' | Null | 'aaaaa'| 
+
++ hash('a') => 5
++ hash('testing') => 3
++ hash('test') => 5
+
 
 ---
 
@@ -237,16 +236,6 @@ https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-
 
 ---
 
-# Distributed and Consistent Hashing
-http://theory.stanford.edu/~tim/s17/l/l1.pdf
-- The goal of consistent hashing: we want hash table-type functionality with the additional property that almost all objects stay assigned to the same cache even as the number n of caches changes.
-- Give locations effectively random numbers between 0 and infinity.
-- Don’t compute hash % number of locations. Instead, find the smallest location number greater than your key’s hash, and put it there.
-- If your hash is greater than all locations, put it in the lowest-numbered location.
-- I start with five locations randomly numbered 1, 20, 41, 1024, 2016. Given a key with hash 1013, I put it in the location numbered 1024. Given a key with hash 2017, I put it in the location numbered 1.
----
-
-
 
 # Trees
 - Root and Parent
@@ -257,11 +246,14 @@ http://theory.stanford.edu/~tim/s17/l/l1.pdf
 ---
 
 # Tree Uses
-- Representing hierarchical data
+- Representing hierarchical data (HTML DOM)
 - Storing data in a way that makes it efficiently searchable (see binary search tree and tree traversal)
 - Storing node relationships
 - As a workflow for compositing digital images for visual effects
 - Routing algorithms
+- Compression algorithms
+- Text prediction
+- Directories
 
 ???
 ### Routing
@@ -308,6 +300,62 @@ A binary heap is defined as a binary tree with two additional constraints:
 <img src='/CS/Day8/heap.png'>
 ]
 
+---
+
+
+# Graphs
+1. A finite set of vertices also called as nodes.
+2. A finite set of ordered pair of the form (u, v) called as edge. The pair is ordered because (u, v) is not same as (v, u) in case of directed graph(di-graph). The pair of form (u, v) indicates that there is an edge from vertex u to vertex v. The edges may contain weight/value/cost.
+
+<img src='/CS/Day12/graph_structure.png'>
+---
+# Graph Theory
+http://www.geeksforgeeks.org/graph-and-its-representations/
+https://en.wikipedia.org/wiki/Graph_%28abstract_data_type%29
+https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)
+https://en.wikipedia.org/wiki/Graph_theory
+>In computer science, a graph is an abstract data type that is meant to implement the undirected graph and directed graph concepts from mathematics, specifically the field of graph theory.
+
+>The order of a graph is `V`, its number of vertices. The size of a graph is `E`, its number of edges.
+
+---
+
+# Adjacency Matrix
+>Adjacency Matrix is a 2D array of size V x V where V is the number of vertices in a graph. Let the 2D array be adj[][], a slot adj[i][j] = 1 indicates that there is an edge from vertex i to vertex j. Adjacency matrix for undirected graph is always symmetric. Adjacency Matrix is also used to represent weighted graphs. If adj[i][j] = w, then there is an edge from vertex i to vertex j with weight w
+
+---
+
+# Adjacency List
+>An array of linked lists is used. Size of the array is equal to number of vertices. Let the array be array[]. An entry array[i] represents the linked list of vertices adjacent to the ith vertex. This representation can also be used to represent a weighted graph. The weights of edges can be stored in nodes of linked lists. Following is adjacency list representation of the above graph.
+---
+
+# Graph Theory - What is the point?!
+- Social Media
+- Linguistics
+- Syntax
+- Semantic Network
+- Chemistry and Biology 
+- Path Finding
+- Recommendation Engines 
+- Web Links - http://ogp.me/
+---
+
+# Dijkstra's Algorithm
+https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+>Dijkstra's algorithm is for finding the shortest paths between nodes in a graph, which may represent, for example, road networks. Created by Edsger W. Dijkstra in 1956.
+
+<img height=300px src='/CS/Day12/Dijkstra_Animation.gif'>
+
+---
+
+# Facebook Graph
+https://developers.facebook.com/docs/graph-api/using-graph-api/#fieldexpansion
+
+https://developers.facebook.com/tools/explorer/?method=GET
+
+https://developers.facebook.com/docs/graph-api/reference/photo/
+
+<img src='/CS/Day12/facebook.png'>
 ---
 
 </textarea>
