@@ -111,12 +111,31 @@ A variable can be
 Primitves keep track of a single data point. Data Structures help keep track of multiple or complex data points.
 
 ---
+# Big O Notation
+> Used to classify algorithms compared to their input size.
+
+.columnA[
++ O(1) .brightGold[BEST]
++ O(log n)
++ O(n)
++ O(n log n)
++ O(n^2)
++ O(n^3)​
++ O(2^n) .lightPurple[WORST]
+]
+
+.columnB.bigO[
+<img height="400px" src='/CS/Day2/bigO.png'>
+]
+
+---
 
 # Array
 An array is a collection of primitives.
 
 - O(n) size, cannot be changed
 - O(1) lookup speed
+- Must be homogeneous
 
 | 0x000 | 0x008 | 0x016 | 0x024 | 
 | --- | --- | --- | --- |
@@ -127,8 +146,8 @@ An array is a collection of primitives.
 
 # A Basic Data Structure
 
-```pyhthon
-class point(x=0, y=0):
+```python
+class point:
   def __init__(self, x=0, y=0):
     self.x = x
     self.y = y
@@ -137,12 +156,22 @@ class point(x=0, y=0):
 
 ```
 
+
+```python
+class account:
+  def __init__(self, id):
+    self.id = id
+    self.account = db.get('select * from account where account.id = %s' % id)
+  def __eq__(self, b):
+    return self.id == b.id
+
+```
 ---
 
 # Linked List
 .columnA[
 - Collection of nodes.
-- Each node has a pointed to the next
+- Each node has a pointer to the next
 - Easy to expand, insert, remove
 - Takes O(n) time to get to an element
 - O(2n) size, but can be easily added to.
@@ -194,22 +223,22 @@ if __name__ == "__main__":
   + Linked list with a pointer going backwards as well as forwards.
 - queue
   + Linked lists that only add nodes at the tail, and remove from the head
-- dequeue
-  + a generalization of stacks and queues (the name is pronounced “deck” and is short for “double-ended queue”)
 - stack
   + Linked list that only add and remove nodes from the tail
+- dequeue
+  + a generalization of stacks and queues (the name is pronounced “deck” and is short for “double-ended queue”)
 
 ---
 
 # Hash Tables
 - Elements can be accessed in O(1) time
-- Size varies, but usually O(n^2)
+- Size varies, but usually O(2n)
 - Requires a hash function and a unique key to identify elements
 
 | 0x000 | 0x004 | 0x008 | 0x016 | 0x024 | 0x032 |
 | --- | --- | --- | --- |
 | a['test'] | Null  | Null |  a['testing'] | Null| a['a'] |
-| 'some data' | Null | Null | 'Test Data' | Null | 'aaaaa'| 
+| ->0x100 | Null | Null | ->0x164 | Null | ->0xA32| 
 
 + hash('a') => 5
 + hash('testing') => 3
@@ -238,18 +267,24 @@ https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-
 
 
 # Trees
+.columnA[
 - Root and Parent
 - Child and Siblings
 - Branches
 - Leaves / Nodes
 - Height
+]
+
+.columnB[
+<img width=500px src='/CS/Day8/tree.gif'>
+]
 ---
 
 # Tree Uses
 - Representing hierarchical data (HTML DOM)
 - Storing data in a way that makes it efficiently searchable (see binary search tree and tree traversal)
 - Storing node relationships
-- As a workflow for compositing digital images for visual effects
+- As a workflow for editing files (undo/redo)
 - Routing algorithms
 - Compression algorithms
 - Text prediction
@@ -271,10 +306,14 @@ each node only has a left and right node
 - Breadth First
 - Height / Depth
 
+## Balancing
+http://www.stoimen.com/blog/2012/07/03/computer-algorithms-balancing-a-binary-search-tree/
+
 ---
 
 # Red Black Tree
 http://www.geeksforgeeks.org/red-black-tree-set-1-introduction-2/
+https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
 .columnA[
 1. Every node has a color either red or black.
 2. Root of tree is always black.
@@ -289,10 +328,11 @@ http://www.geeksforgeeks.org/red-black-tree-set-1-introduction-2/
 
 
 # Binary Heap
+https://www.cs.usfca.edu/~galles/visualization/Heap.html
 .columnA[
 A binary heap is defined as a binary tree with two additional constraints:
 
-*Shape property*: a binary heap is a complete binary tree; that is, all levels of the tree, except possibly the last one (deepest) are fully filled, and, if the last level of the tree is not complete, the nodes of that level are filled from left to right.
+*Shape property*: All levels of the tree, except possibly the last one (deepest) are fully filled, and, if the last level of the tree is not complete, the nodes of that level are filled from left to right.
 
 *Heap property*: the key stored in each node is either greater than or equal to (≥) or less than or equal to (≤) the keys in the node's children, according to some total order.
 ]
@@ -357,6 +397,18 @@ https://developers.facebook.com/docs/graph-api/reference/photo/
 
 <img src='/CS/Day12/facebook.png'>
 ---
+
+
+# Fun Links
+- https://youtu.be/DuDz6B4cqVc
+- https://www.youtube.com/playlist?list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb
+- https://youtu.be/vcQIFT79_50
+- https://youtu.be/YWnBbNj_G-U
+
+
+
+---
+
 
 </textarea>
     <script src="/remark/remark-latest.min.js"></script>
