@@ -100,14 +100,14 @@ class: center, middle
 
 ---
 
+# What you need to remember
 
-# Sorting
-- Sorting is important because it allows for fast searching.
-- Most languages have built in sort functions that are effecient
-- Sorting data is a common and very expensive operation, so its important to understand how the different algorthms work under the hood in the event the default doesn't work well.
-- Also, pretty common in interview questions as the obvious way of sorting is usually the wrong way.
+- Generally just the name and kinda how these algoritms work
+- If you are using more than 2 nested loops, look back to these, you might be doing something wrong
 
 ---
+
+
 
 # CPU Pipeline
 
@@ -165,6 +165,8 @@ if __name__ == "__main__":
 ```
 ]
 
+---
+
 # Memory Management 
 - OS reservation
 - 4k page size
@@ -181,8 +183,6 @@ if __name__ == "__main__":
 + Context Switching
 + Number of commands run
 
-### Memory
-
 ### Disk Access
 + RAID 0 - Fast
 + RAID 1 - Resilient 
@@ -191,15 +191,11 @@ if __name__ == "__main__":
 ]
 .columnB[
 
-
-
 |System Event | Actual Latency|  Scaled Latency|
 | --- | --- | --- |
 |One CPU cycle| 0.4 ns|  1 s
-|Level 1 cache  | 0.9 ns | 2 s
-|Level 2 cache |  2.8 ns|  7 s
-|Level 3 cache  | 28 ns| 1 min
-|Main memory  | ~100 ns| 4 min
+|CPU Cache  | 1-30 ns | 2 s - 1 min
+|RAM  | ~100 ns| 4 min
 |SSD I/O |50–150 μs| 1.5–4 days
 |SATA disk I/O| 1–10 ms| 1–9 months
 |WAN : SFO->NYC |65 ms| 5 years
@@ -211,6 +207,13 @@ http://www.prowesscorp.com/computer-latency-at-a-human-scale/
 
 ---
 
+# Sorting
+- Sorting is important because it allows for fast searching.
+- Most languages have built in sort functions that are effecient
+- Sorting data is a common and very expensive operation, so its important to understand how the different algorthms work under the hood in the event the default doesn't work well.
+- Also, pretty common in interview questions as the obvious way of sorting is usually the wrong way.
+
+---
 
 #Bubble Sort!
 
